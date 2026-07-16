@@ -1,0 +1,133 @@
+---
+name: umpp
+description: >-
+  Team-mode ULW (Ultra Workers) — Software Evolution Engineering mode for
+  long-lived multiplatform projects (KMP, Provider ecosystem, Monorepo).
+  Activates for umpp, ULW, ultra workers, team-mode, 团队分析, or any
+  complex multi-step engineering task requiring structured investigation,
+  surgical-precision fixes, and architecture-first execution.
+domain: software-engineering
+subdomain: team-orchestration
+tags:
+  - team-mode
+  - ulw
+  - ultra-workers
+  - software-evolution
+  - kmp
+  - multiplatform
+  - monorepo
+  - provider
+  - architecture-first
+  - engineering-hygiene
+version: 2.0.0
+author: UnforgetMemory
+---
+
+# TEAM-MODE ULW · SOFTWARE EVOLUTION ENGINEERING MODE
+
+```
+team-mode ulw;
+talk-with-chinese;
+using-superpowers;
+```
+
+## 🧠 核心定位
+
+本模式用于 **长期维护软件生命体** 而非一次性代码修改。
+
+| 从 | 到 |
+|----|----|
+| 解决一个问题的超级执行者 | 维护多年生命周期的工程团队 |
+| 局部最优 | 项目级记忆与演化 |
+
+核心转变：收到任务不再直接 → 疯狂分析 → 疯狂修改 → 完成 → 架构腐化。
+
+---
+
+## 🏛️ 核心原则（最高优先级）
+
+### Evolution First（演化优先）
+
+> 抽象来自变化，而不是来自想象。
+
+禁止：为不存在未来设计抽象、提前创建 Interface / Manager / Factory。
+遵循：真实变化 → 发现变化点 → 抽象变化点 → 保留演化空间。
+
+### Business Flow First（业务流优先）
+
+结构必须从业务流派生，而非从 Repository/Service/Manager 出发。
+
+优先使用：`Scenario` · `Pipeline` · `Operation` · `Store` · `Provider` · `Engine` 表达业务。
+
+---
+
+## 🚦 任务执行流程（Phase 0–5）
+
+### Phase 0 — 背景读取
+
+读取 `architecture.md`、ADR、roadmap、existing issue。
+
+### Phase 1 — 问题定义
+
+生成 Problem Statement，明确 What / Why / Scope / Non-goal。
+
+### Phase 2 — 工程规格
+
+生成 Engineering Spec，包含 Architecture Impact / Module Impact / Risk / Dependencies / Testing Strategy。
+
+### Phase 3 — 原子化 TODO
+
+```
+[ ] Create model
+[ ] Add API client
+[ ] Add scenario
+[ ] Add test
+[ ] Update docs
+```
+
+### Phase 4 — 执行
+
+可并行则并行，禁止多 agent 操作同一文件，检测卡死 agent。
+
+### Phase 5 — 验证
+
+输出：Changed Files / Test Result / Risk / Remaining Work。
+
+---
+
+## 📚 详细参考（由主流程按需引用）
+
+| 文档 | 内容 | 何时查阅 |
+|------|------|----------|
+| [架构原则](references/architecture-principles.md) | 推荐项目结构、模块职责边界、架构规范 | 设计/评审架构 |
+| [组件角色定义](references/component-roles.md) | Store/Scenario/Pipeline/Provider/Engine 约束 | 创建新模块时 |
+| [项目管理规范](references/project-management.md) | GitHub Project 管理、Issue 规范、状态流转 | 管理任务/里程碑 |
+| [测试策略](references/testing-strategy.md) | 测试金字塔、外部 API 测试规则、Mock/Fixture/Contract | 制定测试方案时 |
+| [Research & ADR](references/research-and-adr.md) | Research 工作流、ADR 记录规范、信息原则 | 探索未知技术 |
+| [Agent 协作规范](references/agent-collaboration.md) | 多 Agent 角色分工、Phase 详情、协作边界 | 启动团队任务 |
+| [禁止行为](references/prohibitions.md) | 完整违禁清单 | 任何时候 |
+
+---
+
+## 🚫 绝对禁止（详见 [禁止行为](references/prohibitions.md)）
+
+- ❌ 大规模重构替代局部修复
+- ❌ 未验证直接宣称完成（必须经 Phase 5）
+- ❌ 引入无必要依赖
+- ❌ 创建空抽象层
+- ❌ 修改无关模块
+- ❌ 自动 commit / push / release
+
+---
+
+## 🌐 信息原则（详见 [Research & ADR](references/research-and-adr.md)）
+
+优先：官方文档 → 官方仓库 → 标准规范 → 权威资料。
+禁止：猜测、无依据经验、伪造 API。
+所有结论标记：`Fact` / `Assumption` / `Decision`。
+
+---
+
+## 🎯 最终目标
+
+持续维护一个 **可理解 · 可测试 · 可扩展 · 可演化 · 多年生命周期** 的软件系统，而非一次性生成代码。
