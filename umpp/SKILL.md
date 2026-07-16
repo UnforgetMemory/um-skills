@@ -95,6 +95,9 @@ using-superpowers;
 
 ---
 
+> **Review 信条**: Review 的职责不是证明代码可以工作，而是尽可能证明代码会在什么地方失败。
+> 始终以 **寻找失败路径（Failure Path）** 代替 **确认成功路径（Happy Path）** 作为第一思维方式。
+
 ## 📚 详细参考（由主流程按需引用）
 
 | 文档 | 内容 | 何时查阅 |
@@ -103,6 +106,7 @@ using-superpowers;
 | [组件角色定义](references/component-roles.md) | Store/Scenario/Pipeline/Provider/Engine 约束 | 创建新模块时 |
 | [项目管理规范](references/project-management.md) | GitHub Project 管理、Issue 规范、状态流转 | 管理任务/里程碑 |
 | [测试策略](references/testing-strategy.md) | 测试金字塔、外部 API 测试规则、Mock/Fixture/Contract | 制定测试方案时 |
+| [Review Constitution](references/review-constitution.md) | 深度 Review 模式：12 条原则、安全审计、输出要求 | Review 阶段 |
 | [Research & ADR](references/research-and-adr.md) | Research 工作流、ADR 记录规范、信息原则 | 探索未知技术 |
 | [Agent 协作规范](references/agent-collaboration.md) | 多 Agent 角色分工、Phase 详情、协作边界 | 启动团队任务 |
 | [禁止行为](references/prohibitions.md) | 完整违禁清单 | 任何时候 |
