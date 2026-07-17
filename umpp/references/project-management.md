@@ -142,3 +142,50 @@ vision.md 示例：
 | Bug | GitHub Issue | 聊天记录不是 Bug 跟踪 |
 
 > **一个事实，一个来源。同一信息出现在两个地方 = 至少有一个是错的。**
+
+---
+
+## 🚫 .gitignore 规范
+
+### 必须忽略的类别
+
+```
+# 1. 编辑器/IDE
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# 2. 构建产物
+build/
+out/
+target/
+*.class
+*.jar
+
+# 3. 依赖缓存
+.gradle/
+node_modules/
+.kotlin/
+
+# 4. 本地配置
+local.properties
+.env
+*.local
+
+# 5. Agent/工具运行时文件
+.omo/run-continuation/
+*.swp
+*.swo
+```
+
+### 审查纪律
+
+- `review-constitution.md` 的 gitignore 审查阶段必须逐条检查上述类别
+- **优先使用目录级忽略**（如 `build/`），避免大量文件级规则
+- 禁止源代码被误忽略，禁止构建产物进入 Git
+
+### 本仓库当前覆盖
+
+- `.omo/run-continuation/` — OpenCode 会话延续数据（运行时生成，不提交）
