@@ -4,6 +4,9 @@
 # Local reference materials (dev notes, specs, reasoning traces)
 .localref/
 
+# Build artifacts and compilation outputs
+.output/
+
 # OS files
 .DS_Store
 Thumbs.db
