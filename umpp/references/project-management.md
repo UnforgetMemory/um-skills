@@ -188,6 +188,7 @@ local.properties
 
 ### 本仓库当前覆盖
 
-- `.omo/run-continuation/` — OpenCode 会话延续数据（运行时生成，不提交）
+- `.sisyphus/` — Agent 运行时工作目录
+- `.omo/` — OpenCode 运行时数据（会话延续、工具输出等）
 - `.localref/` — 本地开发参考材料（外部项目代码、测试素材、逆向分析等）
 - `.output/` — 产物与编译输出目录

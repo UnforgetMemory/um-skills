@@ -1,5 +1,8 @@
-# OpenCode session continuation data
-.omo/run-continuation/
+# Agent runtime data
+.sisyphus/
+
+# OpenCode runtime data (session continuation, tool outputs, etc.)
+.omo/
 
 # Local reference materials (dev notes, specs, reasoning traces)
 .localref/
