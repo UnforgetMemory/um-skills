@@ -52,16 +52,26 @@ Magic Context 提供跨会话的持久记忆、历史检索和上下文压缩能
 
 ### 本地参考资料 `.localref/`
 
-项目根目录下的 `.localref/`（已 gitignore）用于存放本地开发参考材料：
+项目根目录下的 `.localref/`（已 gitignore）用于存放**外部参考材料**，不提交到仓库：
 
 ```
 .localref/
-├── specs/         # 功能规格、PRD
-├── references/    # 官方文档摘录、架构笔记
-├── traces/        # 推理过程、决策记录
-└── research/      # 技术调研、PoC 笔记
+├── specs/             # 功能规格、PRD
+├── references/        # 官方文档摘录、架构笔记
+├── traces/            # 推理过程、决策记录
+├── research/          # 技术调研、PoC 笔记
+├── vendor/            # 他人项目源码参考/镜像
+├── test-assets/       # 测试文件、样本数据
+└── web-struct/        # 逆向网页结构、API 响应示例
 ```
 
+典型用途：
+- 参考其他开源项目的实现片段
+- 保存逆向分析的网页 DOM 结构 / API 请求响应
+- 存放测试素材（图片、视频、字幕文件等）
+- 记录推理链路和架构决策草稿
+
+**纪律**：
 - 内容不入库，仅为当前开发环境提供上下文
 - Phase 0 背景读取时优先检查 `.localref/` 中是否有相关材料
 - 使用 `ctx_memory` 将 `.localref/` 中的重要发现持久化到项目记忆
