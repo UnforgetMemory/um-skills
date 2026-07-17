@@ -1,6 +1,9 @@
 # OpenCode session continuation data
 .omo/run-continuation/
 
+# Local reference materials (dev notes, specs, reasoning traces)
+.localref/
+
 # OS files
 .DS_Store
 Thumbs.db

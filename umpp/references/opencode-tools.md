@@ -50,6 +50,22 @@ Magic Context 提供跨会话的持久记忆、历史检索和上下文压缩能
 - **用完即弃**：大型工具输出（搜索结果、构建日志、测试输出）处理完有价值信息后立即 `ctx_reduce`
 - **Phase 0 背景读取**：优先 `ctx_search` 查找相关历史决策和已知约束
 
+### 本地参考资料 `.localref/`
+
+项目根目录下的 `.localref/`（已 gitignore）用于存放本地开发参考材料：
+
+```
+.localref/
+├── specs/         # 功能规格、PRD
+├── references/    # 官方文档摘录、架构笔记
+├── traces/        # 推理过程、决策记录
+└── research/      # 技术调研、PoC 笔记
+```
+
+- 内容不入库，仅为当前开发环境提供上下文
+- Phase 0 背景读取时优先检查 `.localref/` 中是否有相关材料
+- 使用 `ctx_memory` 将 `.localref/` 中的重要发现持久化到项目记忆
+
 ---
 
 ## ✅ LSP 诊断
