@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **umrelease skill** — automated GitHub Release publishing pipeline:
+  - CI dry-run gate: runs release build + test WITHOUT publishing, iterates until success before any tag/release
+  - Professional, concise English Release Notes generation via changelog-automation and conventional-commits
+  - Release Notes security audit: blocks internal API endpoints, implementation details, secrets, internal IPs, and private references from public release notes
+  - Version detection (package.json / pyproject.toml / Cargo.toml / build.gradle / pubspec.yaml / VERSION / git tag) with SemVer tag generation
+  - `gh release create` publishing with support for assets, prerelease, draft, and target branch
+  - Manual confirmation gates: version confirmation before tagging, Release Notes review before publishing
+  - Hard rules: CI dry-run must pass before any tag; release notes shown for manual review before publishing; zero internal details exposed
+- **README**: skills table entry for the umrelease skill
 - **umreview skill** — automated pre-merge code review and hygiene pipeline:
   - Multi-axis code review (correctness / readability / architecture / security / performance) with severity-labeled findings (`Critical:` / `Nit:` / `Optional:` / `FYI`)
   - Necessary concise English comments (WHY-only, no noise, no commented-out code)
