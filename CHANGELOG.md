@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **umpp skill v2.2.0** — modern KMP/Kotlin multi-modal architecture reference:
+  - Seven-layer architecture: app / feature / store / scenario / provider / engine / libraries
+  - Unidirectional dependency rules with common violation patterns
+  - KMP multi-platform specifics: `expect`/`actual` strategy, compile target distribution, library ecosystem
+  - Architecture health metrics, degradation signals, and optimization checklist
+  - Cross-reference mapping to existing umpp component roles
 - **umpp skill v2.1.0** — pre-flight safety gate constraint for unconfigured directories:
   - Mandatory A/B/C safety gates before ANY modification/deletion: git repository existence (`git rev-parse --is-inside-work-tree`) → remote configured (`git remote`) → commit identity set (`user.name` / `user.email`)
   - Any modification/deletion is blocked when a gate is unmet, with a Chinese-language prompt and explicit user permission required before continuing

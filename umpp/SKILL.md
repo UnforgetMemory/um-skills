@@ -19,7 +19,7 @@ tags:
   - provider
   - architecture-first
   - engineering-hygiene
-version: 2.1.0
+version: 2.2.0
 author: UnforgetMemory
 ---
 
@@ -171,6 +171,7 @@ Markdown 只保存「为什么」，不保存「今天做什么」。
 |------|------|----------|
 | [架构原则](references/architecture-principles.md) | 推荐项目结构、速查表、模块职责、SSoT、链路示例 | 设计/评审架构 |
 | [组件角色定义](references/component-roles.md) | Store/Scenario/Pipeline/Provider/Engine/Library 约束 | 创建新模块时 |
+| [现代架构分层](references/modern-architecture.md) | KMP 七层架构、依赖规则、架构指标、多模态优化 | 架构设计/评审/引入 KMP 时 |
 | [项目管理规范](references/project-management.md) | GitHub Project 管理、Markdown 定位、SSoT、Vision | 管理任务/里程碑 |
 | [测试策略](references/testing-strategy.md) | 测试金字塔、外部 API 测试规则、Mock/Fixture/Contract | 制定测试方案时 |
 | [Review Constitution](references/review-constitution.md) | 深度 Review 模式：12 条原则、安全审计、输出要求 | Review 阶段 |
