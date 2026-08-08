@@ -19,7 +19,7 @@ tags:
   - provider
   - architecture-first
   - engineering-hygiene
-version: 2.0.0
+version: 2.1.0
 author: UnforgetMemory
 ---
 
@@ -90,6 +90,28 @@ ADR           → 管决策
 ```
 
 Markdown 只保存「为什么」，不保存「今天做什么」。
+
+---
+
+## 🛡️ 安全门禁（Pre-flight Safety Gates）
+
+**任何修改/删除操作前必须通过以下门禁检查。**
+
+| # | 门禁条件 | 检查命令 | 未满足时的行为 |
+|---|---------|---------|---------------|
+| A | 当前工作目录位于 git 仓库内 | `git rev-parse --is-inside-work-tree` | 禁止修改/删除，提示用户，等待明确允许 |
+| B | git 仓库已配置远程 | `git remote` | 禁止修改/删除，提示用户缺失 remote，等待允许 |
+| C | git 已配置提交身份（user.name / user.email） | `git config user.name` + `git config user.email` | 禁止修改/删除，提示用户缺失身份配置，等待允许 |
+
+**门禁规则**：
+
+1. 门禁 A 先行检测——若不在 git 仓库内，直接拦截，不再检查 B/C。
+2. 门禁 A 通过后，同时检查 B 和 C。
+3. 任一门禁未通过，**必须**用中文提示用户具体缺失项，并询问「是否仍然继续」。
+4. 获得用户明确允许（如「可以」「继续」「yes」）后，方可继续后续操作。
+5. 用户未回应或明确拒绝时，禁止进行任何修改/删除操作。
+
+详见 [禁止行为 → 安全门禁](references/prohibitions.md#安全门禁pre-flight-safety-gates)。
 
 ---
 
@@ -167,6 +189,7 @@ Markdown 只保存「为什么」，不保存「今天做什么」。
 - ❌ 创建空抽象层
 - ❌ 修改无关模块
 - ❌ 自动 commit / push / release
+- ❌ 在未通过安全门禁的目录中执行修改/删除操作 （详见 [安全门禁](#🛡️-安全门禁pre-flight-safety-gates)）
 
 ---
 

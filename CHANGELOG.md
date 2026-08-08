@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **umpp skill v2.1.0** — pre-flight safety gate constraint for unconfigured directories:
+  - Mandatory A/B/C safety gates before ANY modification/deletion: git repository existence (`git rev-parse --is-inside-work-tree`) → remote configured (`git remote`) → commit identity set (`user.name` / `user.email`)
+  - Any modification/deletion is blocked when a gate is unmet, with a Chinese-language prompt and explicit user permission required before continuing
+  - Updated `references/prohibitions.md` with the new Safety Gates category (A/B/C gate table + ordering rules)
 - **umrelease skill** — automated GitHub Release publishing pipeline:
   - CI dry-run gate: runs release build + test WITHOUT publishing, iterates until success before any tag/release
   - Professional, concise English Release Notes generation via changelog-automation and conventional-commits
