@@ -21,3 +21,14 @@ Thumbs.db
 .idea/
 .vscode/
 *.iml
+
+# 项目记忆（本地专属，不 sync）
+.um.agents/memory/
+*.local.md
+
+# Agent 会话临时文件（审查/提交/发布过程中的中间产物）
+.umc-*.txt
+.umreview-*.txt
+.um-tmp.txt
+.um-verify.txt
+.tmp-*.md
