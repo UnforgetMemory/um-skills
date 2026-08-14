@@ -58,7 +58,8 @@ node_modules/ dist/ build/ 等构建产物（gitignore 即可）
 - 格式：`pattern|action|date`（action: migrate / skip / warn）
 - 每行 <60 字符，整个文件 <500 字符
 - 命中记忆 → 直接执行，**零询问零 token 浪费**
-- 记忆只增不改（append-only），防重复错误迁移
+- 记忆 append-only，**新行覆盖旧行（后写优先）**——决策错误时追加新决策修正，不删旧行
+- 迁移到 `constraints/` 的条目需人工确认（见 [project-memory.md](project-memory.md) 分级规则）
 
 ## 5. 纪律
 - 禁止未经确认的批量迁移（防误迁工具目录）
