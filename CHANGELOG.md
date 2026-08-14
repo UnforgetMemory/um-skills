@@ -5,16 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.1.2] - 2026-08-14
+
+### Fixed
+
+- **4 个 SKILL.md 引用路径修复** — DSH 部署后 `core/references/` 与 `adapters/` 为技能目录的兄弟目录，路径必须加 `../` 前缀（`../core/references/xxx.md` / `../adapters/<env>/tools.md`），否则按技能基目录解析会指向不存在的文件：
+  - umpp/SKILL.md、umcommit/SKILL.md、umrelease/SKILL.md、umreview/SKILL.md
+- 统一文本内裸名引用为完整路径（`decision-panel.md`、`subagent-orchestration.md` → `../core/references/...`）
 
 ### Added
 
+- `deploy.ps1` 一键部署脚本（复制 core/adapters/4 技能到 `~/.dsh/skills/`）
 - Professional README with logo, badges, Ko-fi donation button, and table of contents
 - English README (README.en.md) with language switch
 - VERSION file for formal version source (0.1.1)
 
 ### Changed
 
+- `ARCHITECTURE.md`: 新增「路径约定」章节（部署后目录结构 + `../` 前缀要求），更新部署命令
 - `.um.agents/constraints/hardcode-index.md`: sync version pointer to VERSION
 
 ## [0.1.0] - 2026-08-14

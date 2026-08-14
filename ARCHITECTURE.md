@@ -84,6 +84,22 @@ memory/        不 sync：*.local.md（环境/决策草稿/陷阱）
 
 > 说明：全流程成本低于「所有 reference 之和」，因为按需加载——每个 Phase 只读自己需要的文件，简单任务（如仅提交无版本升级）只加载 SKILL.md + 1-2 个 L2。
 
+## 路径约定（部署后）
+
+```
+~/.dsh/skills/
+  core/references/          ← L0+L2 引用文件（无 SKILL.md，不注册为 skill）
+  adapters/<env>/           ← L3 环境适配器
+  umpp/SKILL.md             ← L1 技能路由表
+  umcommit/SKILL.md
+  umrelease/SKILL.md
+  umreview/SKILL.md
+```
+
+**SKILL.md 中的路径必须使用 `../` 前缀引用 `core/` 和 `adapters/`**，因为技能基目录解析为 `~/.dsh/skills/<skill>/`，而 `core/` 和 `adapters/` 是其兄弟目录（同级）。例如：
+- `read ../core/references/base-constraints.md` ✅
+- `read core/references/base-constraints.md` ❌ — 解析为 `~/.dsh/skills/<skill>/core/references/...`，文件不存在
+
 ## 维护指南
 
 | 变更 | 位置 |
@@ -98,8 +114,15 @@ memory/        不 sync：*.local.md（环境/决策草稿/陷阱）
 ## 部署
 
 ```bash
+# 快速部署（Windows PowerShell 或 Bash）
 cp -r core ~/.dsh/skills/core
 cp -r adapters ~/.dsh/skills/adapters
 cp -r umpp umcommit umrelease umreview ~/.dsh/skills/
-# core/ 与 adapters/ 无 SKILL.md，不会被注册为 skill，仅被 read 引用
+
+# 或使用部署脚本（推荐）
+./deploy.ps1
 ```
+
+> `core/` 与 `adapters/` 无 SKILL.md，不会被注册为 skill，仅被 `read` 工具引用。
+> 部署后需确保路径约定正确：SKILL.md 中所有引用使用 `../` 前缀。
+> 首次部署后需重载技能（重启 DSH 进程或重新加载技能目录）使变更生效。
