@@ -20,9 +20,9 @@ user-invocable: true
 - 并行：umreview（发布前审查）
 
 ## 前置路由（最小集，先读）
-1. read `core/references/base-constraints.md`（元约束，必须）
-2. read `core/references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
-3. 其余 L0 延迟加载：`context-adaptation` 到 Phase 0 档位自检；`project-memory` 到 P0/P9 记忆读取；`decision-panel` 到 P4 版本确认
+1. read `../core/references/base-constraints.md`（元约束，必须）
+2. read `../core/references/environment-routing.md` → 环境 → `../adapters/<env>/tools.md`（会话内一次）
+3. 其余 L0 延迟加载：`../core/references/context-adaptation.md` 到 Phase 0 档位自检；`../core/references/project-memory.md` 到 P0/P9 记忆读取；`../core/references/decision-panel.md` 到 P4 版本确认
 
 ## 核心定位
 一次调用完成发布。**CI dry-run 未通过禁止创建 tag/发布；Notes 发布前必须人工确认。**
@@ -31,22 +31,22 @@ user-invocable: true
 1. CI dry-run 门禁未过 → 禁止 tag/发布
 2. Notes 发布前展示确认；禁止暴露内部接口/实现细节
 3. Notes 专业、简洁、英文
-4. 版本决策按 `decision-panel.md` 智能适配（SemVer/CalVer/自定义）
+4. 版本决策按 `../core/references/decision-panel.md` 智能适配（SemVer/CalVer/自定义）
 
 ## 执行管线（路由表）
 
 | Phase | 做什么 | read（按需） | 工具 | 决策点 |
 |-------|--------|-------------|------|--------|
-| P0 | 版本与范围采集：版本源检测 + 待发布变动 + gh 可用性 | core/references/version-detection.md | read/命令 | 版本源确认 |
-| P1 | CI dry-run 门禁：按项目栈构建+测试+产物验证，**不发布** | ci-*.md（按栈选 1 个） | 构建命令 | 失败→修复重跑 |
-| P2 | Release Notes 生成：git log 分类映射 | changelog.md · conventional-commits.md | 文件工具 | 结构定稿 |
-| P3 | Notes 安全审计：内部泄露扫描 | core/references/security-audit.md | grep/命令 | Critical/High→阻断 |
-| P4 | 版本确认：面板 Q1（风格匹配选项 + CalVer 链） | core/references/decision-panel.md | 交互工具 | 目标版本 |
-| P5 | 创建 tag：SemVer vX.Y.Z / CalVer YYYY.MM.DD[.HHMM[.NN]]；验证 | core/references/version-tag.md | 命令 | tag 冲突检查 |
+| P0 | 版本与范围采集：版本源检测 + 待发布变动 + gh 可用性 | ../core/references/version-detection.md | read/命令 | 版本源确认 |
+| P1 | CI dry-run 门禁：按项目栈构建+测试+产物验证，**不发布** | ../core/references/ci-*.md（按栈选 1 个） | 构建命令 | 失败→修复重跑 |
+| P2 | Release Notes 生成：git log 分类映射 | ../core/references/changelog.md · ../core/references/conventional-commits.md | 文件工具 | 结构定稿 |
+| P3 | Notes 安全审计：内部泄露扫描 | ../core/references/security-audit.md | grep/命令 | Critical/High→阻断 |
+| P4 | 版本确认：面板 Q1（风格匹配选项 + CalVer 链） | ../core/references/decision-panel.md | 交互工具 | 目标版本 |
+| P5 | 创建 tag：SemVer vX.Y.Z / CalVer YYYY.MM.DD[.HHMM[.NN]]；验证 | ../core/references/version-tag.md | 命令 | tag 冲突检查 |
 | P6 | Notes 展示 + 发布确认：面板 Q2 | — | 交互工具 | 显式确认 |
-| P7 | 发布：gh release create（标准/prerelease/draft/assets） | core/references/release-gh.md | 命令 | exit 0 |
-| P8 | 验证：gh release view 确认可见+资产 | core/references/release-gh.md | 命令 | 核对 |
-| P9 | 硬编码联动：按索引同步发布版本号 → 回写索引 | core/references/project-memory.md | 文件工具 | 索引核对 |
+| P7 | 发布：gh release create（标准/prerelease/draft/assets） | ../core/references/release-gh.md | 命令 | exit 0 |
+| P8 | 验证：gh release view 确认可见+资产 | ../core/references/release-gh.md | 命令 | 核对 |
+| P9 | 硬编码联动：按索引同步发布版本号 → 回写索引 | ../core/references/project-memory.md | 文件工具 | 索引核对 |
 
 ## 决策面板（一次交互）
 ```
