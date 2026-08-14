@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Professional README with logo, badges, Ko-fi donation button, and table of contents
+- English README (README.en.md) with language switch
+- VERSION file for formal version source (0.1.1)
+
+### Changed
+
+- `.um.agents/constraints/hardcode-index.md`: sync version pointer to VERSION
+
+## [0.1.0] - 2026-08-14
+
+### Added
+
 - **v6 架构重构** — 多环境（DSH / OpenCode / Codex）可路由的工程技能链路库：
   - **四层架构**：L0 基础约束（6 文件）→ L1 专业编排（4 个 SKILL.md 路由表）→ L2 流程规则（25 个细分文件）→ L3 环境工具（3 环境 × 2 文件）
   - **环境路由**：system prompt 特征 → 工具签名 → 询问 + 记忆（`.um.agents/memory/environment.local.md`）
