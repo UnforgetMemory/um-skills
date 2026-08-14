@@ -9,6 +9,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **v6 架构重构** — 多环境（DSH / OpenCode / Codex）可路由的工程技能链路库：
+  - **四层架构**：L0 基础约束（6 文件）→ L1 专业编排（4 个 SKILL.md 路由表）→ L2 流程规则（25 个细分文件）→ L3 环境工具（3 环境 × 2 文件）
+  - **环境路由**：system prompt 特征 → 工具签名 → 询问 + 记忆（`.um.agents/memory/environment.local.md`）
+  - **决策面板**：一次多问（ask_user_question GUI 弹窗），版本选项智能适配（SemVer/CalVer/自定义），CalVer 链 `YYYY.MM.DD[.HHMM[.NN]]`
+  - **上下文自适应**：L/M/H 档位 + 波次迭代收缩模式（步骤完整性优先）
+  - **Subagent 编排**：决策树（可并行/环境支持/边界清晰）+ 生命周期管控 + 下探分派（只带自己的 reference）
+  - **项目记忆**：`.um.agents/` 硬编码语义索引（`语义 | 值 | 短路径 | 同步说明`），解决升级版本漏硬编码；local 不 sync（`*.local.md`）
+  - **缓存稳定**：指令文本零动态值，KV Cache 前缀稳定
+  - **面向 Agent**：SKILL.md/references 浓缩指令化；**面向人类**：README/ARCHITECTURE 解释文档分离
+
+### Changed
+
+- **umpp** — 从 207 行全量指令 → 65 行路由表（链路位置/前置路由/档位/Phase 表）
+- **umcommit** — 从 98 行 → 78 行路由表；三轮提问 → 一次决策面板；版本源官方优先 + 硬编码索引联动
+- **umrelease** — 从 94 行 → 77 行路由表；CalVer 时间版本链；CI 门禁按项目栈选 1 个 ci-*.md
+- **umreview** — 从 139 行 → 76 行路由表；核磁共振式审查（逐文件证据矩阵 + 私货扫描）
+
+### Removed
+
+- 旧 references 目录（umpp/umcommit/umrelease/umreview/references）— 内容迁移至 core/references/
+- OpenCode 专属工具引用（aft_*/ctx_*/lsp_diagnostics）— 由 adapters/ 按环境路由替代
+
+## [Unreleased]（历史条目）
+
+### Added
+
 - **umpp skill v2.2.0** — modern KMP/Kotlin multi-modal architecture reference:
   - Seven-layer architecture: app / feature / store / scenario / provider / engine / libraries
   - Unidirectional dependency rules with common violation patterns
