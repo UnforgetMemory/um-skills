@@ -20,12 +20,10 @@ user-invocable: true
 - 后继：umcommit（规划完成需提交时）→ umrelease（发布时）
 - 并行：umreview（执行中各波次间可插入审查）
 
-## 前置路由（先读）
-1. read `core/references/base-constraints.md`（元约束 + 缓存稳定）
-2. read `core/references/environment-routing.md` → 识别环境 → 会话内一次
-3. 按环境 read `adapters/<env>/tools.md` + `capabilities.md`
-4. read `core/references/context-adaptation.md` → 档位自检 + 波次计划
-5. read `core/references/project-memory.md` → 检查 `.um.agents/` 记忆
+## 前置路由（最小集，先读）
+1. read `core/references/base-constraints.md`（元约束，必须）
+2. read `core/references/environment-routing.md` → 识别环境 → `adapters/<env>/tools.md`（会话内一次）
+3. 其余 L0 延迟加载：`context-adaptation` 到 Phase 0 档位自检；`project-memory`/`artifact-routing` 到 P0 记忆与产物扫描；`subagent-orchestration` 到首次分派
 
 ## 核心定位
 长期维护软件生命体，而非一次性修改。抽象来自真实变化（Evolution First）。

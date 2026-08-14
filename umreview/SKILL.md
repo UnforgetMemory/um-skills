@@ -20,12 +20,10 @@ user-invocable: true
 - 后继：umcommit（审查通过后提交）
 - 并行：umpp（执行中波次间审查）
 
-## 前置路由（先读）
-1. read `core/references/base-constraints.md`
-2. read `core/references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`
-3. read `core/references/context-adaptation.md` → 档位/波次（审查天然适合波次）
-4. read `core/references/subagent-orchestration.md`（文件多时波次分派）
-5. read `core/references/project-memory.md` → 对照 `.um.agents/constraints/` 查违规
+## 前置路由（最小集，先读）
+1. read `core/references/base-constraints.md`（元约束，必须）
+2. read `core/references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
+3. 其余 L0 延迟加载：`context-adaptation` 到 Phase 0 档位自检；`subagent-orchestration` 到波次分派；`project-memory` 到 P7 私货对照
 
 ## 核心定位
 一次调用完成提交前全面体检。信条：**寻找失败路径，而非确认成功路径。**

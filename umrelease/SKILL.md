@@ -19,12 +19,10 @@ user-invocable: true
 - 后继：无
 - 并行：umreview（发布前审查）
 
-## 前置路由（先读）
-1. read `core/references/base-constraints.md`
-2. read `core/references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`
-3. read `core/references/context-adaptation.md` → 档位/波次
-4. read `core/references/project-memory.md` → `.um.agents/` 硬编码索引
-5. read `core/references/decision-panel.md`（版本选项规范）
+## 前置路由（最小集，先读）
+1. read `core/references/base-constraints.md`（元约束，必须）
+2. read `core/references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
+3. 其余 L0 延迟加载：`context-adaptation` 到 Phase 0 档位自检；`project-memory` 到 P0/P9 记忆读取；`decision-panel` 到 P4 版本确认
 
 ## 核心定位
 一次调用完成发布。**CI dry-run 未通过禁止创建 tag/发布；Notes 发布前必须人工确认。**
