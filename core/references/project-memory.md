@@ -9,6 +9,7 @@
 │   └── environment.md         ← 仅团队统一环境时才入库
 ├── memory/                    ← 本地，不 sync（gitignore）
 │   ├── environment.local.md   ← 环境识别结果（歧义优先 local）
+│   ├── artifact-decisions.local.md ← 产物迁移决策记忆（一行一决策，见 artifact-routing.md）
 │   ├── decisions.local.md     ← 个人决策草稿
 │   └── gotchas.local.md       ← 已知陷阱
 └── .gitignore                 ← 自包含：memory/ + *.local.md
@@ -28,3 +29,7 @@
 - `.local.md` 后缀 = 本地专属，永不 sync（全局 gitignore：`*.local.md`）
 - 歧义/个人内容 → 优先 local；团队共识 → 升级到 constraints/（去 .local 后缀）
 - constraints 入库前经人工确认（禁未经确认的团队级写入）
+
+## Agent 产物路由
+- 未归档 agent 产物的识别/迁移/豁免规则见 [artifact-routing.md](artifact-routing.md)
+- 决策记忆文件：`memory/artifact-decisions.local.md`（极轻量，一行一决策）

@@ -48,7 +48,7 @@ user-invocable: true
 | P3 | 安全审计：敏感信息扫描 + 信任边界 | core/references/security-audit.md | grep/命令 | Critical→阻断 |
 | P4 | gitignore 覆盖审计：目录级优先 | core/references/review-gitignore.md | 命令 | check-ignore 验证 |
 | P5 | 测试覆盖评估：行为变更 → 覆盖缺口 → RED→GREEN | core/references/review-test-coverage.md | 测试命令 | 补测决策 |
-| P6 | 清洁：过期测试（确认后删）/遗留进程/产物 | core/references/review-cleanup.md | 命令 | 确认后执行 |
+| P6 | 清洁：过期测试（确认后删）/遗留进程/产物 + **轻量产物扫描**（未跟踪 agent 产物 → 记忆命中直接应用，仅新产物提示迁移决策） | core/references/review-cleanup.md · core/references/artifact-routing.md | 命令 | 确认后执行；迁移决策 |
 | P7 | 私货扫描：对照 .um.agents/constraints/ 查未申报修改/硬编码后门 | core/references/project-memory.md | grep/read | 违规标记 |
 
 ## 核磁共振审查（P1/P7 核心）

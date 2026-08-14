@@ -40,7 +40,7 @@ user-invocable: true
 
 | Phase | 做什么 | read（按需） | 工具 | 决策点 |
 |-------|--------|-------------|------|--------|
-| P0 | 背景读取：architecture.md/ADR/roadmap/issue + .um.agents 记忆 | core/references/project-management.md | read/grep | 记忆缺失→询问 |
+| P0 | 背景读取：architecture.md/ADR/roadmap/issue + .um.agents 记忆 + **产物扫描**（识别未归档 agent 产物 → 迁移决策 → 记入记忆） | core/references/project-management.md · core/references/artifact-routing.md | read/grep | 记忆缺失→询问；产物→迁移决策 |
 | P1 | 问题定义：Problem Statement（What/Why/Scope/Non-goal） | — | — | 范围确认 |
 | P2 | 工程规格：Architecture/Module Impact/Risk/Dependencies/Test Strategy | architecture-principles.md · component-roles.md · modern-architecture.md | read | 架构评审 |
 | P3 | 原子化 TODO：每项独立可验证、标依赖 | — | todo_write | 拆分确认 |
