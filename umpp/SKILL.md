@@ -1,207 +1,65 @@
 ---
 name: umpp
 description: >-
-  Team-mode ULW (Ultra Workers) — Software Evolution Engineering mode for
-  long-lived multiplatform projects (KMP, Provider ecosystem, Monorepo).
-  Activates for umpp, ULW, ultra workers, team-mode, 团队分析, or any
-  complex multi-step engineering task requiring structured investigation,
-  surgical-precision fixes, and architecture-first execution.
-domain: software-engineering
-subdomain: team-orchestration
-tags:
-  - team-mode
-  - ulw
-  - ultra-workers
-  - software-evolution
-  - kmp
-  - multiplatform
-  - monorepo
-  - provider
-  - architecture-first
-  - engineering-hygiene
-version: 2.2.0
-author: UnforgetMemory
+  UM 工程链路 · 规划专业。复杂多步工程任务（KMP/多平台/Provider 生态）的
+  结构化调查与架构优先执行：Problem Statement → Engineering Spec →
+  原子化 TODO → 波次执行 → 验证。触发词：umpp/ULW/团队分析/架构设计/
+  长期项目维护/复杂多步任务。
+whenToUse: >-
+  User says umpp, ULW, ultra workers, team-mode, 团队分析, or requests
+  structured investigation / architecture-first execution of a complex
+  multi-step engineering task.
+disable-model-invocation: false
+user-invocable: true
 ---
 
-# TEAM-MODE ULW · SOFTWARE EVOLUTION ENGINEERING MODE
+# umpp — 规划专业（Software Evolution Engineering）
 
+## 链路位置
+- 前置：无（链路起点）
+- 后继：umcommit（规划完成需提交时）→ umrelease（发布时）
+- 并行：umreview（执行中各波次间可插入审查）
+
+## 前置路由（先读）
+1. read `core/references/base-constraints.md`（元约束 + 缓存稳定）
+2. read `core/references/environment-routing.md` → 识别环境 → 会话内一次
+3. 按环境 read `adapters/<env>/tools.md` + `capabilities.md`
+4. read `core/references/context-adaptation.md` → 档位自检 + 波次计划
+5. read `core/references/project-memory.md` → 检查 `.um.agents/` 记忆
+
+## 核心定位
+长期维护软件生命体，而非一次性修改。抽象来自真实变化（Evolution First）。
+
+## 硬性纪律
+1. 修改/删除前过安全门禁（git 仓库/remote/身份，缺失则询问用户）
+2. 禁止大规模重构替代局部修复；禁止创建空抽象层
+3. ADR 驱动变更：改架构假设先记 ADR 再改代码
+4. 禁止自动 commit/push/release
+
+## 执行管线（路由表）
+
+| Phase | 做什么 | read（按需） | 工具 | 决策点 |
+|-------|--------|-------------|------|--------|
+| P0 | 背景读取：architecture.md/ADR/roadmap/issue + .um.agents 记忆 | core/references/project-management.md | read/grep | 记忆缺失→询问 |
+| P1 | 问题定义：Problem Statement（What/Why/Scope/Non-goal） | — | — | 范围确认 |
+| P2 | 工程规格：Architecture/Module Impact/Risk/Dependencies/Test Strategy | architecture-principles.md · component-roles.md · modern-architecture.md | read | 架构评审 |
+| P3 | 原子化 TODO：每项独立可验证、标依赖 | — | todo_write | 拆分确认 |
+| P4 | 波次执行：可并行→subagent 决策树；禁止同文件并发 | core/references/subagent-orchestration.md | subagent/workflow | 冲突检测 |
+| P5 | 验证：构建+测试全绿；文档同步 | core/references/testing-strategy.md | 环境工具 | 门禁逐级过 |
+
+## 波次编排
+按 P0→P5 依赖切波；P4 内独立任务按 `subagent-orchestration.md` 决策树分派；
+每波产出结构化证据（文件:行），波间收缩保留摘要。
+
+## 验证门禁
+1. 语言工具链检查通过 → 2. 构建 exit 0 → 3. 测试全绿 → 4. 文档同步 → 5. 证据齐全
+
+## 输出报告
 ```
-team-mode ulw;
-talk-with-chinese;
-using-superpowers;
+## umpp 报告
+### 问题定义 / 工程规格
+### 变更文件（带证据）
+### 验证结果（构建/测试输出）
+### 风险与剩余工作
+### ⚠️ 状态: COMPLETED / BLOCKED
 ```
-
-## 🧠 核心定位
-
-本模式用于 **长期维护软件生命体** 而非一次性代码修改。
-
-| 从 | 到 |
-|----|----|
-| 解决一个问题的超级执行者 | 维护多年生命周期的工程团队 |
-| 局部最优 | 项目级记忆与演化 |
-
-核心转变：收到任务不再直接 → 疯狂分析 → 疯狂修改 → 完成 → 架构腐化。
-
----
-
-## 🏛️ 核心原则（最高优先级）
-
-### Evolution First（演化优先）
-
-> 抽象来自变化，而不是来自想象。
-
-禁止：为不存在未来设计抽象、提前创建 Interface / Manager / Factory。
-遵循：真实变化 → 发现变化点 → 抽象变化点 → 保留演化空间。
-
-### Business Flow First（业务流优先）
-
-结构必须从业务流派生，而非从 Repository/Service/Manager 出发。
-
-优先使用：`Scenario` · `Pipeline` · `Operation` · `Store` · `Provider` · `Engine` 表达业务。
-
-### Single Source of Truth（单一事实来源）
-
-系统中每个维度的信息有且只有一个权威来源。
-
-| 内容 | 权威来源 |
-|------|---------|
-| 当前任务 | GitHub Project |
-| 技术决策 | ADR |
-| 代码状态 | Git |
-| 架构原则 | Architecture Docs |
-| 版本计划 | Roadmap (GitHub Project) |
-| Bug | Issue |
-
-**纪律**：ADR 驱动变更，而非变更后补 ADR。更新架构假设或模块边界时，先记 ADR 再改代码。
-
-### Markdown 是知识载体，不是项目管理工具
-
-```
-vision.md / architecture.md / roadmap.md
-```
-
-是最低成本方案，适合起步。长期项目必须分离：
-
-```
-GitHub Project → 管变化
-ADR           → 管决策
-代码 (Git)     → 管事实
-文档 (Markdown)→ 管理解
-```
-
-Markdown 只保存「为什么」，不保存「今天做什么」。
-
----
-
-## 🛡️ 安全门禁（Pre-flight Safety Gates）
-
-**任何修改/删除操作前必须通过以下门禁检查。**
-
-| # | 门禁条件 | 检查命令 | 未满足时的行为 |
-|---|---------|---------|---------------|
-| A | 当前工作目录位于 git 仓库内 | `git rev-parse --is-inside-work-tree` | 禁止修改/删除，提示用户，等待明确允许 |
-| B | git 仓库已配置远程 | `git remote` | 禁止修改/删除，提示用户缺失 remote，等待允许 |
-| C | git 已配置提交身份（user.name / user.email） | `git config user.name` + `git config user.email` | 禁止修改/删除，提示用户缺失身份配置，等待允许 |
-
-**门禁规则**：
-
-1. 门禁 A 先行检测——若不在 git 仓库内，直接拦截，不再检查 B/C。
-2. 门禁 A 通过后，同时检查 B 和 C。
-3. 任一门禁未通过，**必须**用中文提示用户具体缺失项，并询问「是否仍然继续」。
-4. 获得用户明确允许（如「可以」「继续」「yes」）后，方可继续后续操作。
-5. 用户未回应或明确拒绝时，禁止进行任何修改/删除操作。
-
-详见 [禁止行为 → 安全门禁](references/prohibitions.md#安全门禁pre-flight-safety-gates)。
-
----
-
-## 🚦 任务执行流程（Phase 0–5）
-
-### Phase 0 — 背景读取
-
-读取 `architecture.md`、ADR、roadmap、existing issue。
-
-### Phase 1 — 问题定义
-
-生成 Problem Statement，明确 What / Why / Scope / Non-goal。
-
-### Phase 2 — 工程规格
-
-生成 Engineering Spec，包含 Architecture Impact / Module Impact / Risk / Dependencies / Testing Strategy。
-
-### Phase 3 — 原子化 TODO
-
-```
-[ ] Create model
-[ ] Add API client
-[ ] Add scenario
-[ ] Add test
-[ ] Update docs
-```
-
-### Phase 4 — 执行
-
-可并行则并行，禁止多 agent 操作同一文件，检测卡死 agent。
-
-### Phase 5 — 验证
-
-输出：Changed Files / Test Result / Risk / Remaining Work。
-
-**验证门禁（逐级通过）**：
-```
-1. lsp_diagnostics clean（每次编辑后立即检查）
-2. 构建通过（exit 0）
-3. 全部测试通过
-4. 回归场景均 PASS
-5. 文档同步更新
-```
-
-- 每次编辑后对修改文件运行 `lsp_diagnostics`
-- Phase 4→5 过渡运行 `aft_inspect` 全量检查
-- 禁止在 LSP 报错未修复的情况下推进
-
----
-
-> **Review 信条**: Review 的职责不是证明代码可以工作，而是尽可能证明代码会在什么地方失败。
-> 始终以 **寻找失败路径（Failure Path）** 代替 **确认成功路径（Happy Path）** 作为第一思维方式。
-
-## 📚 详细参考（由主流程按需引用）
-
-| 文档 | 内容 | 何时查阅 |
-|------|------|----------|
-| [架构原则](references/architecture-principles.md) | 推荐项目结构、速查表、模块职责、SSoT、链路示例 | 设计/评审架构 |
-| [组件角色定义](references/component-roles.md) | Store/Scenario/Pipeline/Provider/Engine/Library 约束 | 创建新模块时 |
-| [现代架构分层](references/modern-architecture.md) | KMP 七层架构、依赖规则、架构指标、多模态优化 | 架构设计/评审/引入 KMP 时 |
-| [项目管理规范](references/project-management.md) | GitHub Project 管理、Markdown 定位、SSoT、Vision | 管理任务/里程碑 |
-| [测试策略](references/testing-strategy.md) | 测试金字塔、外部 API 测试规则、Mock/Fixture/Contract | 制定测试方案时 |
-| [Review Constitution](references/review-constitution.md) | 深度 Review 模式：12 条原则、安全审计、输出要求 | Review 阶段 |
-| [Research & ADR](references/research-and-adr.md) | Research 工作流、ADR 记录规范、信息原则 | 探索未知技术 |
-| [Agent 协作规范](references/agent-collaboration.md) | 多 Agent 角色分工、Phase 详情、协作边界 | 启动团队任务 |
-| [OpenCode 工具利用](references/opencode-tools.md) | AFT、Magic Context、LSP 高效使用指南 | 任何时候 |
-| [禁止行为](references/prohibitions.md) | 完整违禁清单 | 任何时候 |
-
----
-
-## 🚫 绝对禁止（详见 [禁止行为](references/prohibitions.md)）
-
-- ❌ 大规模重构替代局部修复
-- ❌ 未验证直接宣称完成（必须经 Phase 5）
-- ❌ 引入无必要依赖
-- ❌ 创建空抽象层
-- ❌ 修改无关模块
-- ❌ 自动 commit / push / release
-- ❌ 在未通过安全门禁的目录中执行修改/删除操作 （详见 [安全门禁](#🛡️-安全门禁pre-flight-safety-gates)）
-
----
-
-## 🌐 信息原则（详见 [Research & ADR](references/research-and-adr.md)）
-
-优先：官方文档 → 官方仓库 → 标准规范 → 权威资料。
-禁止：猜测、无依据经验、伪造 API。
-所有结论标记：`Fact` / `Assumption` / `Decision`。
-
----
-
-## 🎯 最终目标
-
-持续维护一个 **可理解 · 可测试 · 可扩展 · 可演化 · 多年生命周期** 的软件系统，而非一次性生成代码。
