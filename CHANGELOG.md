@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-08-24
+
+### Fixed
+
+- **skills 安装丢失共享层** — vercel-labs/skills 只复制技能自身目录（缺 `name`/`description` frontmatter 的目录被跳过），根级共享层从不参与安装，导致技能路由表 `../` 引用悬空、reference 无法溯源：
+  - 采用**伞形单技能**方案：唯一技能目录 `skills/um/` 内含入口路由（触发词 → 专业分册）、四专业分册 `professions/*.md`、以及 `references/` 与 `adapters/` 的**全仓唯一副本**——canonical 即安装物，整库或单技能安装均完整可溯源
+  - 零复制零漂移：无生成器、无同步门禁；编辑直接发生在 `skills/um/` 内，一处生效
+  - 决策演进：安装桩（ADR-001）→ 每技能 vendor（ADR-002）→ 伞形收敛（[ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)）；ADR-001/002 已标记 Superseded
+
+### Changed
+
+- **仓库布局收敛**：根级 `core/`、`adapters/` 与四个独立技能目录取消，统一迁入 `skills/um/`；常驻 skill summary 由 4 条降为 1 条，references 分层懒加载不变
+- `ARCHITECTURE.md`: 新增「仓库布局与伞形单技能」，重写路径约定 / 维护指南 / 部署
+- `README.md` / `README.en.md`: 快速开始以 skills 安装器为推荐方式，专业文档指向 `professions/` 分册
+- `deploy.ps1`: 部署唯一目录 `skills/um`；检测目标机 v0.1.x 旧布局残留仅提示不删除
+- `.um.agents/constraints/project-rules.md`: 架构约束与维护纪律改为 um 单一事实源模型
+
 ## [0.1.2] - 2026-08-14
 
 ### Fixed
