@@ -1,6 +1,6 @@
 # UM Skills 架构（v6 — 多环境链路）
 
-> 人类阅读文档。面向 Agent 的规则见各 `SKILL.md` 与 `core/references/`。
+> 人类阅读文档。面向 Agent 的规则见 `skills/um/SKILL.md`（入口）、`professions/`（分册路由表）与 `references/`。
 
 ## 设计目标
 
@@ -14,16 +14,16 @@
 ## 四层架构
 
 ```
-L0 基础约束层  core/references/{base-constraints, environment-routing,
+L0 基础约束层  um/references/{base-constraints, environment-routing,
                 context-adaptation, decision-panel, subagent-orchestration,
                 project-memory}.md
-                ← 所有 skill 引用，单一事实来源
+                ← 所有分册引用，单一事实来源
 
-L1 专业编排层  4 个 SKILL.md = 路由表（Phase → reference 映射）
+L1 专业编排层  入口 SKILL.md（触发词路由）+ professions/ 四个分册路由表
                 umpp（规划）· umcommit（提交）· umrelease（发布）· umreview（审查）
                 ← 每行 Phase 标注：做什么 / read 什么 / 用什么工具 / 决策点
 
-L2 流程规则层  core/references/ 其余 ~25 个细分文件
+L2 流程规则层  um/references/ 其余 ~25 个细分文件
                 ← 每个 = 一个可独立委派的子任务边界（subagent 只读自己的）
 
 L3 环境工具层  adapters/{dsh,opencode,codex}/{tools,capabilities}.md
@@ -74,7 +74,7 @@ memory/        不 sync：*.local.md（环境/决策草稿/陷阱）
 
 | 项 | 实测字符数 | 估算 tokens |
 |----|-----------|------------|
-| 常驻（各 skill summary） | ~400 字符 | ~400 |
+| 常驻（um 入口 summary） | ~250 字符 | ~250 |
 | 单个 SKILL.md（L1 路由表） | 2,065–2,599 | ~2,000–2,600 |
 | L0 基础约束（按需 read，6 文件合计） | 4,733 | ~2,400–4,700 |
 | 单个 L2 reference | 626–3,388（平均 1,413） | ~600–3,400 |
@@ -84,45 +84,63 @@ memory/        不 sync：*.local.md（环境/决策草稿/陷阱）
 
 > 说明：全流程成本低于「所有 reference 之和」，因为按需加载——每个 Phase 只读自己需要的文件，简单任务（如仅提交无版本升级）只加载 SKILL.md + 1-2 个 L2。
 
+## 仓库布局与伞形单技能（ADR-003）
+
+```
+um-skills/
+└── skills/um/                ← vercel-labs/skills 官方统一顶层容器内的唯一技能
+    ├── SKILL.md              ← 入口路由表：触发词 → 专业分册 + 公共前置
+    ├── professions/          ← 四专业分册（无 frontmatter，不被注册为技能）
+    │   ├── umpp.md · umcommit.md · umrelease.md · umreview.md
+    ├── references/           ← L0+L2 全量唯一副本（单一事实源）
+    └── adapters/<env>/       ← L3 唯一副本（dsh / opencode / codex）
+```
+
+- **canonical 即安装物**：仓库内只有这一份规则源——零复制、零漂移、无生成器；
+  编辑直接发生在 `skills/um/` 内，一处生效
+- 入口只做路由（触发词 → 分册）与公共前置（base-constraints + environment-routing）；
+  分册保留完整 Phase 路由表，按需懒加载
+- 决策演进：桩方案（ADR-001）→ 每技能 vendor（ADR-002）→ 伞形收敛（ADR-003）；
+  安装器事实核查见 ADR-002
+
 ## 路径约定（部署后）
 
 ```
-~/.dsh/skills/
-  core/references/          ← L0+L2 引用文件（无 SKILL.md，不注册为 skill）
-  adapters/<env>/           ← L3 环境适配器
-  umpp/SKILL.md             ← L1 技能路由表
-  umcommit/SKILL.md
-  umrelease/SKILL.md
-  umreview/SKILL.md
+~/.dsh/skills/um/            ← 单一自包含技能目录
+    SKILL.md                 ← 入口路由
+    professions/*.md         ← read professions/<name>.md
+    references/*.md          ← read references/X.md
+    adapters/<env>/...       ← read adapters/<env>/tools.md
 ```
 
-**SKILL.md 中的路径必须使用 `../` 前缀引用 `core/` 和 `adapters/`**，因为技能基目录解析为 `~/.dsh/skills/<skill>/`，而 `core/` 和 `adapters/` 是其兄弟目录（同级）。例如：
-- `read ../core/references/base-constraints.md` ✅
-- `read core/references/base-constraints.md` ❌ — 解析为 `~/.dsh/skills/<skill>/core/references/...`，文件不存在
+所有引用一律使用**技能内相对路径**：
+- `read references/base-constraints.md` ✅
+- `read ../core/references/X.md` ❌ — v0.1.x 旧约定，已废弃
 
 ## 维护指南
 
 | 变更 | 位置 |
 |------|------|
-| 工具升级（某环境） | 只改 `adapters/<env>/tools.md` |
-| 安全审计规则 | 只改 `core/references/security-audit.md` |
-| 版本规则 | `version-detection.md` + `version-tag.md` |
-| 新增流程规则 | 平台无关 → core；平台相关 → 对应 adapter |
-| 新增专业 skill | 新建目录 + L1 路由表 + 引用 L0/L2 |
+| 工具升级（某环境） | 只改 `skills/um/adapters/<env>/tools.md` |
+| 安全审计规则 | 只改 `skills/um/references/security-audit.md` |
+| 版本规则 | `references/version-detection.md` + `version-tag.md` |
+| 新增流程规则 | 平台无关 → references/；平台相关 → 对应 adapter |
+| 分发机制变更 | 见 docs/adr/ADR-003（演进：ADR-001 → ADR-002 → ADR-003） |
+| 新增专业 | 新建 `skills/um/professions/<name>.md` + 入口路由表加一行 |
 | 人类文档 | README.md / ARCHITECTURE.md（禁止 agent 指令混入） |
 
 ## 部署
 
 ```bash
-# 快速部署（Windows PowerShell 或 Bash）
-cp -r core ~/.dsh/skills/core
-cp -r adapters ~/.dsh/skills/adapters
-cp -r umpp umcommit umrelease umreview ~/.dsh/skills/
+# 方式一：vercel-labs skills 安装器（单技能即全量 —— ADR-003）
+npx skills add unforgetmemory/um-skills
 
-# 或使用部署脚本（推荐）
+# 方式二：手工复制唯一技能目录
+cp -r skills/um ~/.dsh/skills/
+
+# 方式三：部署脚本
 ./deploy.ps1
 ```
 
-> `core/` 与 `adapters/` 无 SKILL.md，不会被注册为 skill，仅被 `read` 工具引用。
-> 部署后需确保路径约定正确：SKILL.md 中所有引用使用 `../` 前缀。
+> 目标机 v0.1.x 旧布局残留的 `core/`、`adapters/` 与四个旧技能目录已无作用，可手动删除（deploy.ps1 仅提示不删除）。
 > 首次部署后需重载技能（重启 DSH 进程或重新加载技能目录）使变更生效。

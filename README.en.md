@@ -61,21 +61,27 @@ Together, they form a complete engineering pipeline, supporting **DSH** (DeepSee
 
 ## 🚀 Quick Start
 
+### Install via skills CLI (vercel-labs, recommended)
+
+```bash
+npx skills add unforgetmemory/um-skills
+```
+
+> Umbrella single skill: the only skill directory `skills/um/` embeds the entry
+> router, four profession route tables, and the single copies of
+> references / adapters — one source of truth, zero duplication, install as-is
+> ([ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)).
+
 ### Deploy to DSH
 
 ```bash
-# Deploy skills to DSH
-cp -r core adapters umpp umcommit umrelease umreview ~/.dsh/skills/
-
-# core/ and adapters/ have no SKILL.md, so they won't be registered as skills;
-# they are only referenced via read by SKILLs that need them
+cp -r skills/um ~/.dsh/skills/
 ```
 
 ### Deploy to OpenCode
 
 ```bash
-# Deploy skills to OpenCode
-cp -r core adapters umpp umcommit umrelease umreview ~/.opencode/skills/
+cp -r skills/um ~/.opencode/skills/
 ```
 
 ### Usage
@@ -93,12 +99,16 @@ In any supported environment, speak the trigger words to your AI Agent to invoke
 
 ## 🧩 Skills Overview
 
+> The four professions are consolidated into the single umbrella skill **um**
+> ([ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)): after install, trigger
+> words route to the matching profession table below.
+
 | Skill | Domain | One-liner | Documentation |
 |-------|--------|-----------|---------------|
-| [**umpp**](umpp/SKILL.md) | 📐 Planning | Structured investigation and architecture-first execution for complex multi-step tasks | [Router](umpp/SKILL.md) |
-| [**umcommit**](umcommit/SKILL.md) | ✅ Commit | CHANGELOG + audited commit + push (single decision panel, version-aware) | [Router](umcommit/SKILL.md) |
-| [**umrelease**](umrelease/SKILL.md) | 🚀 Release | CI dry-run gate → Release Notes → SemVer/CalVer tag → gh release | [Router](umrelease/SKILL.md) |
-| [**umreview**](umreview/SKILL.md) | 🔍 Review | MRI-style five-axis review + security/gitignore/test/cleanup, no commit or push | [Router](umreview/SKILL.md) |
+| [**umpp**](skills/um/professions/umpp.md) | 📐 Planning | Structured investigation and architecture-first execution for complex multi-step tasks | [Router](skills/um/professions/umpp.md) |
+| [**umcommit**](skills/um/professions/umcommit.md) | ✅ Commit | CHANGELOG + audited commit + push (single decision panel, version-aware) | [Router](skills/um/professions/umcommit.md) |
+| [**umrelease**](skills/um/professions/umrelease.md) | 🚀 Release | CI dry-run gate → Release Notes → SemVer/CalVer tag → gh release | [Router](skills/um/professions/umrelease.md) |
+| [**umreview**](skills/um/professions/umreview.md) | 🔍 Review | MRI-style five-axis review + security/gitignore/test/cleanup, no commit or push | [Router](skills/um/professions/umreview.md) |
 
 ### Skill Chain
 
@@ -116,20 +126,20 @@ The project uses a **four-layer architecture** for progressive disclosure and on
 ```
 ┌───────────────────────────────────────────────────────────────┐
 │  L0  Base Constraints Layer                                   │
-│  core/references/ (6 files)                                   │
+│  um/references/ (6 files)                                     │
 │  Meta-constraints · Environment Routing · Context Adaptation  │
 │  Decision Panel · Subagent Orchestration · Project Memory     │
 ├───────────────────────────────────────────────────────────────┤
 │  L1  Skill Orchestration Layer                                │
-│  4 SKILL.md = router tables (Phase → reference mapping)       │
+│  Entry SKILL.md + professions/ four router tables             │
 │  umpp · umcommit · umrelease · umreview                      │
 ├───────────────────────────────────────────────────────────────┤
 │  L2  Process Rules Layer                                      │
-│  core/references/ (~25 granular files)                        │
+│  um/references/ (~25 granular files)                          │
 │  Each file = one independently delegatable task boundary      │
 ├───────────────────────────────────────────────────────────────┤
 │  L3  Environment Tool Layer                                   │
-│  adapters/{dsh,opencode,codex}/{tools,capabilities}.md        │
+│  um/adapters/{dsh,opencode,codex}/{tools,capabilities}.md     │
 │  Platform tool mappings and capability profiles               │
 └───────────────────────────────────────────────────────────────┘
 ```
@@ -140,6 +150,7 @@ The project uses a **four-layer architecture** for progressive disclosure and on
 - **Decision Panel** — Multi-question GUI dialog in one pass, version options auto-adapt (SemVer/CalVer)
 - **Wave Iteration** — Step completeness first; the only degradation when capacity is low is finer waves, never skipping steps
 - **Subagent Orchestration** — Decision tree dispatch, each subagent carries only its own chain's references
+- **Umbrella Single Skill** — one skill `um` inside the unified top-level container: canonical is the artifact, single source of truth with zero duplication ([ADR-003](docs/adr/ADR-003-umbrella-single-skill.md))
 - **Cache Stability** — Zero dynamic values in instruction text, stable KV Cache prefix
 
 > 📖 See [ARCHITECTURE.md](ARCHITECTURE.md) for the complete architecture design.
@@ -169,10 +180,10 @@ Each project root can have a `.um.agents/` directory for persisting engineering 
 |----------|---------|
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Four-layer architecture, environment routing, decision panel, wave iteration, token budget, maintenance guide |
 | [CHANGELOG.md](CHANGELOG.md) | Version history |
-| [umpp/SKILL.md](umpp/SKILL.md) | Planning skill router |
-| [umcommit/SKILL.md](umcommit/SKILL.md) | Commit skill router |
-| [umrelease/SKILL.md](umrelease/SKILL.md) | Release skill router |
-| [umreview/SKILL.md](umreview/SKILL.md) | Review skill router |
+| [umpp/SKILL.md](skills/um/professions/umpp.md) | Planning skill router |
+| [umcommit/SKILL.md](skills/um/professions/umcommit.md) | Commit skill router |
+| [umrelease/SKILL.md](skills/um/professions/umrelease.md) | Release skill router |
+| [umreview/SKILL.md](skills/um/professions/umreview.md) | Review skill router |
 
 ---
 
