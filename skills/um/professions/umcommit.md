@@ -1,16 +1,3 @@
----
-name: umcommit
-description: >-
-  UM 工程链路 · 提交专业。一次调用完成：CHANGELOG（安全审计）→
-  Conventional Commit 消息（安全审计）→ 原子提交 → 推送（显式确认）。
-  含版本智能识别（SemVer/CalVer/自定义，官方源优先）与硬编码索引联动。
-  触发词：umcommit/写 CHANGELOG/提交/推送/版本升级。
-whenToUse: >-
-  User says umcommit, or asks to write a CHANGELOG, commit & push,
-  or bump project version. NEVER pushes without explicit yes.
-disable-model-invocation: false
-user-invocable: true
----
 
 # umcommit — 提交专业（CHANGELOG · 审计提交 · 安全推送）
 
@@ -20,9 +7,9 @@ user-invocable: true
 - 并行：umreview（提交前审查，可先行）
 
 ## 前置路由（最小集，先读）
-1. read `../core/references/base-constraints.md`（元约束，必须）
-2. read `../core/references/environment-routing.md` → 环境 → `../adapters/<env>/tools.md`（会话内一次）
-3. 其余 L0 延迟加载：`../core/references/context-adaptation.md` 到 Phase 0 档位自检；`../core/references/project-memory.md` 到 P2/P8 记忆读取；`../core/references/decision-panel.md` 到首个决策点
+1. read `references/base-constraints.md`（元约束，必须）
+2. read `references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
+3. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/project-memory.md` 到 P2/P8 记忆读取；`references/decision-panel.md` 到首个决策点
 
 ## 核心定位
 一次调用完成提交链路。**Commit 内容先展示确认；Push 必须显式允许。**
@@ -38,14 +25,14 @@ user-invocable: true
 | Phase | 做什么 | read（按需） | 工具 | 决策点 |
 |-------|--------|-------------|------|--------|
 | P0 | 变更采集：git status/diff/log 识别风格 | — | 环境命令 | 范围清单 |
-| P1 | 提交规划：原子拆分（≥3 文件→≥2 commit） | ../core/references/conventional-commits.md | — | 拆分确认 |
-| P2 | 版本识别：官方源检测→风格解析→智能适配 | ../core/references/version-detection.md | read | 决策面板 Q1 |
-| P3 | CHANGELOG 编写 | ../core/references/changelog.md | 文件工具 | 版本化/Unreleased |
-| P4 | CHANGELOG 安全审计 | ../core/references/security-audit.md | grep/命令 | Critical/High→阻断 |
-| P5 | 提交消息生成 + 面板确认 | ../core/references/decision-panel.md | 交互工具 | 面板 Q2 |
-| P6 | 暂存+审计（add 后 commit 前） | ../core/references/security-audit.md | grep/命令 | Hard Block |
+| P1 | 提交规划：原子拆分（≥3 文件→≥2 commit） | references/conventional-commits.md | — | 拆分确认 |
+| P2 | 版本识别：官方源检测→风格解析→智能适配 | references/version-detection.md | read | 决策面板 Q1 |
+| P3 | CHANGELOG 编写 | references/changelog.md | 文件工具 | 版本化/Unreleased |
+| P4 | CHANGELOG 安全审计 | references/security-audit.md | grep/命令 | Critical/High→阻断 |
+| P5 | 提交消息生成 + 面板确认 | references/decision-panel.md | 交互工具 | 面板 Q2 |
+| P6 | 暂存+审计（add 后 commit 前） | references/security-audit.md | grep/命令 | Hard Block |
 | P7 | 执行提交：--signoff -F 消息文件；逐组验证 | — | 环境命令 | log 验证 |
-| P8 | 硬编码同步：按索引短路径逐处更新→回写索引 | ../core/references/project-memory.md | 文件工具 | 索引核对 |
+| P8 | 硬编码同步：按索引短路径逐处更新→回写索引 | references/project-memory.md | 文件工具 | 索引核对 |
 | P9 | 推送：面板 Q3 意愿→条件执行→验证 | — | 环境命令 | 显式确认 |
 
 ## 决策面板（一次交互，禁止分轮）

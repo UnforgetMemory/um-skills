@@ -6,7 +6,7 @@
 - 系统提示含 "DeepSeek Harness" / "dsh" / `DSH_*` 变量 → **dsh**
 - 系统提示含 "OpenCode" / `aft_*` / `ctx_*` → **opencode**
 - 系统提示含 "Codex" / "codex" → **codex**
-- 命中即确定：read `adapters/<env>/tools.md`（会话内一次），不再探测
+- 命中即确定：read 技能根目录下 `adapters/<env>/tools.md`（会话内一次），不再探测
 
 ### L2 工具签名（L1 无明确标识时）
 - 工具含 pwsh / cordis_* / job_* → **dsh**
