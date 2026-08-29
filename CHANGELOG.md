@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-08-29
+
+### Added
+
+- **时间锚点语义**：`base-constraints.md` 新增「时间与最新语义」——「最新/当前」指实时时间（实时互联网授时 → 本地时钟 → 询问用户），禁止当作模型知识截止时间；锚点只进会话记忆，新会话重新确认
+- **.um.agents 时间戳规范**：`project-memory.md` 要求 constraints/ 与 memory/ 全部 .md 文件头带秒级 `createdAt`/`updatedAt`（实时锚点取值）；修改同步 `updatedAt`；读取时 > 90 天视为可能过期须确认
+- **缓存稳定扩展**：动态频繁的值在指令与 reference 只存权威获取源（URL/工具），不存值本身，防 KV Cache 失效
+- **umreview 重审闭环**：审查中任何修改 → 修改点重新完整审查，直至一轮零修改或人工确认
+- **umreview 全深度双向溯源**：改动点向上追至调用入口/数据源、向下追至调用叶子/最终输出，无论层级深浅禁止截断；新发现受影响文件递归纳入；`review-constitution.md` 接入 P1 路由
+
+### Changed
+
+- `prohibitions.md`: 新增 #6（截断溯源）与 #10（审查中修改不重审），编号整体顺移为 11–19
+- `.um.agents/` 现有文档补齐秒级时间戳 meta（回溯登记）
+- `.gitignore` / `project-rules.md`: 根级 `.umc-*` 等临时文件模式合并为 `.um.agents/tmp/` 目录级忽略
+
 ## [0.2.0] - 2026-08-24
 
 ### Fixed
