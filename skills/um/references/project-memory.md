@@ -30,6 +30,18 @@
 - 歧义/个人内容 → 优先 local；团队共识 → 升级到 constraints/（去 .local 后缀）
 - constraints 入库前经人工确认（禁未经确认的团队级写入）
 
+## 时间戳规范（防过期知识）
+1. `.um.agents/` 下所有文档/记忆文件（constraints/ 与 memory/ 的全部 .md）文件头必须携带 `createdAt` / `updatedAt`，秒级精度
+2. 取值只能来自实时时间锚点（见 base-constraints.md「时间与最新语义」）：实时互联网授时 → 本地时钟 → 均不可得则询问用户；禁止模型知识截止时间或猜测
+3. 每次修改文件内容 → 同步更新 `updatedAt`；`createdAt` 恒为首次创建值，永不改写
+4. 读取时比对 `updatedAt` 与本会话时间锚点：距今 > 90 天 → 内容视为可能过期，采信前先与用户确认（阈值可在 project-rules.md 覆盖）
+
+模板（置于文件第一行）：
+<!--
+createdAt: YYYY-MM-DD HH:mm:ss +08:00 (来源)
+updatedAt: YYYY-MM-DD HH:mm:ss +08:00 (来源)
+-->
+
 ## Agent 产物路由
 - 未归档 agent 产物的识别/迁移/豁免规则见 [artifact-routing.md](artifact-routing.md)
 - 决策记忆文件：`memory/artifact-decisions.local.md`（极轻量，一行一决策）
