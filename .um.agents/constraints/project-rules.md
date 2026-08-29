@@ -1,3 +1,7 @@
+<!--
+createdAt: 2026-08-29 18:25:32 +08:00 (本地时钟·回溯登记)
+updatedAt: 2026-08-29 18:25:32 +08:00 (本地时钟)
+-->
 # 项目规范（um-skills 仓库自举）
 
 ## 本仓库定位
@@ -14,3 +18,4 @@
 - 分发机制：伞形单技能 skills/um（ADR-003），canonical 即安装物，仓库内不存在第二份规则副本
 - 新增专业：新建 professions/<name>.md 分册 + 入口路由表加一行
 - 记忆分级：团队共识 → constraints/（入库）；个人/歧义 → memory/*.local.md（不 sync）
+- 会话临时产物（commit 草稿、审查中间件等）统一写 `.um.agents/tmp/`（已 gitignore），禁止散落仓库根

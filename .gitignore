@@ -26,12 +26,5 @@ Thumbs.db
 .um.agents/memory/
 *.local.md
 
-# Agent 会话临时文件（审查/提交/发布过程中的中间产物）
-.umc-*.txt
-.umreview-*.txt
-.umr-*.txt
-.umt-*.txt
-.umv-*.txt
-.um-tmp.txt
-.um-verify.txt
-.tmp-*.md
+# Agent 会话临时文件（统一目录，禁止散落仓库根）
+.um.agents/tmp/
