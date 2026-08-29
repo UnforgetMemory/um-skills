@@ -21,13 +21,15 @@
 3. 禁止修改无关模块
 4. 注释必须简洁英文（WHY 不重复 WHAT）
 5. 每个文件必须显式回报「已检查/发现 X/无异常」——不得跳文件
+6. 审查中任何修改/优化（修复缺陷、删注释、补测试、清理）→ 受影响修改点重新执行完整 umreview，直至一轮审查零修改或人工确认才可收尾（重审闭环）
+7. 每个改动点全深度双向溯源：向上追至调用入口/数据源，向下追至调用叶子/最终输出，无论层级深浅禁止截断；溯源新发现的受影响文件递归纳入审查范围
 
 ## 执行管线（路由表）
 
 | Phase | 做什么 | read（按需） | 工具 | 决策点 |
 |-------|--------|-------------|------|--------|
 | P0 | 范围界定：git status/diff，changed files 清单 | — | 环境命令 | 审查基准 |
-| P1 | 五轴审查：逐文件证据矩阵（Correctness/Readability/Architecture/Security/Performance） | references/review-axes.md | read/grep | 严重度标注 |
+| P1 | 五轴审查：逐文件证据矩阵（Correctness/Readability/Architecture/Security/Performance）+ 全深度双向溯源 | references/review-axes.md · references/review-constitution.md | read/grep | 严重度标注 |
 | P2 | 注释规范检查：WHY-only 英文注释 | references/review-comments.md | 文件工具 | 噪音注释删除 |
 | P3 | 安全审计：敏感信息扫描 + 信任边界 | references/security-audit.md | grep/命令 | Critical→阻断 |
 | P4 | gitignore 覆盖审计：目录级优先 | references/review-gitignore.md | 命令 | check-ignore 验证 |
@@ -37,6 +39,8 @@
 
 ## 核磁共振审查（P1/P7 核心）
 - 证据矩阵：每个变更文件 × 五轴 → 输出 `<文件>:<行> — [严重度] 问题 — 修复`
+- 溯源矩阵：每个修改点 → 上游（callers/dependents）与下游（callees/dependencies）全深度影响链，逐环节 `文件:行` 证据，直至调用图收敛；确认修改未破坏上下游流转
+- 重审闭环：审查中任何修改 → 修改点重新入队审查（溯源重跑），记录重审轮次与终态
 - 私货检查：未申报修改、隐藏逻辑、悄悄放宽校验、硬编码后门
 - 与项目约束对照：违反 `.um.agents/constraints/` 的改动显式标记
 - 文件多 → 波次分派 subagent（每 subagent 一文件组，独立证据矩阵，主 agent 汇总）
@@ -46,6 +50,7 @@
 2. P5：测试套件全绿（RED→GREEN 证据）
 3. P4：check-ignore 确认全部非源码产物被忽略
 4. 终态：git status 全部变更未提交
+5. 重审闭环：审查期间每次修改后受影响面重审；终态 = 最后一轮审查零修改（或人工确认遗留项）
 
 ## 输出报告
 ```
@@ -56,5 +61,7 @@
 ### 清洁项（过期测试/进程/产物）
 ### 私货检查结果
 ### 验证证据
+### 溯源矩阵（修改点 → 上游/下游全深度影响链）
+### 重审记录（审查中修改 → 重审轮次 → 终态零修改/人工确认）
 ### ⚠️ 状态: NOT COMMITTED — 全部变更等待人工审查
 ```

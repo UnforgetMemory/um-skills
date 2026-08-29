@@ -18,15 +18,21 @@
 - 绝不默认"代码是对的"。主动搜寻：bug、风险、不一致、可维护性问题、架构腐化、安全问题、性能问题、缺失的测试。
 - 任何"Looks Good"都必须有充分依据。
 - 绝不因文件小、diff 小或问题简单而降低评审深度。
+- 重审闭环：审查阶段产生的任何修改 → 修改点必须重新审查，直至零修改或人工确认；审查不是一次性的。
 
-## 评审范围 —— 跟随完整调用链
+## 评审范围 —— 全深度双向溯源
 
 ```
-current change → callers → callees → related modules
-  → public API → tests → documentation → build configuration
+current change → 上游（callers/dependents，追至调用入口/数据源）
+              → 下游（callees/dependencies，追至调用叶子/最终输出）
+              → related modules → public API → tests → documentation → build configuration
 ```
 
-禁止：只评审当前文件。
+- 无论深度：层级再深、改动再小都不得截断，以调用图收敛（入口/叶子/稳定边界）为终点
+- 溯源新发现的受影响文件 → 递归纳入审查范围（范围随溯源收敛，不一次性拍定）
+- 目的：确认修改没有破坏上下游流转——一处堵塞 = 整条链路（城市下水道）瘫痪
+
+禁止：只评审当前文件；禁止以"深度/规模"为由缩减溯源。
 
 ## 代码评审轴
 
@@ -122,6 +128,8 @@ current change → callers → callees → related modules
 ```
 [ ] 是否有模块未检查？
 [ ] 是否有调用链未验证？
+[ ] 每个修改点是否完成上下游全深度溯源（直至收敛）？
+[ ] 审查中产生的修改是否已触发重新审查？
 [ ] 是否有异常路径遗漏？
 [ ] 是否有"我假设没问题"的推断？
 [ ] 是否有未经验证的结论？
