@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-08-29
+
+### Fixed
+
+- **umreview 禁令清单孤儿引用** — `prohibitions.md` 从未被任何路由表加载，禁令（前置安全门禁 A/B/C、#6 截断溯源、#10 审查中修改不重审等）长期空转：接入 umreview 前置路由为必读约束（与 base-constraints 同级），P7 私货扫描同步按禁令清单拦截违规
+
 ## [0.2.1] - 2026-08-29
 
 ### Added
