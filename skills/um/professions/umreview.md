@@ -8,8 +8,9 @@
 
 ## 前置路由（最小集，先读）
 1. read `references/base-constraints.md`（元约束，必须）
-2. read `references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
-3. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/subagent-orchestration.md` 到波次分派；`references/project-memory.md` 到 P7 私货对照
+2. read `references/prohibitions.md`（禁令清单，必须）
+3. read `references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
+4. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/subagent-orchestration.md` 到波次分派；`references/project-memory.md` 到 P7 私货对照
 
 ## 核心定位
 一次调用完成提交前全面体检。信条：**寻找失败路径，而非确认成功路径。**
@@ -35,7 +36,7 @@
 | P4 | gitignore 覆盖审计：目录级优先 | references/review-gitignore.md | 命令 | check-ignore 验证 |
 | P5 | 测试覆盖评估：行为变更 → 覆盖缺口 → RED→GREEN | references/review-test-coverage.md | 测试命令 | 补测决策 |
 | P6 | 清洁：过期测试（确认后删）/遗留进程/产物 + **轻量产物扫描**（未跟踪 agent 产物 → 记忆命中直接应用，仅新产物提示迁移决策） | references/review-cleanup.md · references/artifact-routing.md | 命令 | 确认后执行；迁移决策 |
-| P7 | 私货扫描：对照 .um.agents/constraints/ 查未申报修改/硬编码后门 | references/project-memory.md | grep/read | 违规标记 |
+| P7 | 私货扫描：对照 .um.agents/constraints/ 查未申报修改/硬编码后门 + 按禁令清单拦截违规 | references/project-memory.md | grep/read | 违规标记 |
 
 ## 核磁共振审查（P1/P7 核心）
 - 证据矩阵：每个变更文件 × 五轴 → 输出 `<文件>:<行> — [严重度] 问题 — 修复`
