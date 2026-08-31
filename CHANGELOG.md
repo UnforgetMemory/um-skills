@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-08-31
+
+### Added
+
+- **破坏性操作门禁 D0-D3**：新增 `destructive-ops-gates.md` 分级门禁——D0 可重新生成产物白名单（node_modules、构建产物、缓存、测试产物等）免逐项确认；D1 覆盖写须 read 原文+意图确认；D2 文件删除须清单+确认+恢复点；D3 目录递归删除/未跟踪文件/git 破坏命令须全量清单+可恢复性声明+显式确认
+- **工作区外（OOB）操作流**：默认权限确认；确认请求附充分简洁理由 + 可恢复性提示（未跟踪/无备份明示「无可恢复」）；git 方案仅推荐给 git 跟踪的单文件/小体积目录
+- **恢复点与 git 恢复手册**：新增 `recovery-points.md`——R1 哈希锚点 / R2 stash 快照 / R3 未跟踪文件备份，附 restore/reflog/checkout 恢复命令表
+- **前置安全门禁 A-D**：`prohibitions.md` 门禁升级——A 门禁要求唯一识别 root project（嵌套 git 判定四步法，识别不出禁止乱操作）；新增 D 门禁版本管理强制（除读取外一切操作作用于版本管理体系内，无则提问警告）
+- **deploy.ps1 部署门禁**：旧部署改名备份为恢复点，覆盖前交互确认，旧恢复点存在即中止
+- **护栏提示**：dsh adapter 注明审批 never + danger-full-access 时 skill 门禁为唯一防线
+
+### Changed
+
+- 四分册前置路由统一接入 `prohibitions.md` 必读；umpp/umcommit/umrelease 在首个文件修改前挂接 destructive-ops-gates + recovery-points；umreview P6 清洁行同步挂接
+- `review-cleanup.md` 补白名单交叉引用；umpp P2 补 research-and-adr；umrelease P2 补 release-notes（孤儿引用修复）
+
 ## [0.2.2] - 2026-08-29
 
 ### Fixed
