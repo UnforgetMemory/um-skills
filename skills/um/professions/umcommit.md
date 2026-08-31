@@ -8,8 +8,9 @@
 
 ## 前置路由（最小集，先读）
 1. read `references/base-constraints.md`（元约束，必须）
-2. read `references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
-3. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/project-memory.md` 到 P2/P8 记忆读取；`references/decision-panel.md` 到首个决策点
+2. read `references/prohibitions.md`（禁令清单 + 安全门禁 A-D，必须）
+3. read `references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
+4. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/project-memory.md` 到 P2/P8 记忆读取；`references/decision-panel.md` 到首个决策点；`references/destructive-ops-gates.md` · `references/recovery-points.md` 到首个文件修改前（CHANGELOG/版本文件）
 
 ## 核心定位
 一次调用完成提交链路。**Commit 内容先展示确认；Push 必须显式允许。**

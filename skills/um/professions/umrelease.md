@@ -8,8 +8,9 @@
 
 ## 前置路由（最小集，先读）
 1. read `references/base-constraints.md`（元约束，必须）
-2. read `references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
-3. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/project-memory.md` 到 P0/P9 记忆读取；`references/decision-panel.md` 到 P4 版本确认
+2. read `references/prohibitions.md`（禁令清单 + 安全门禁 A-D，必须）
+3. read `references/environment-routing.md` → 环境 → `adapters/<env>/tools.md`（会话内一次）
+4. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/project-memory.md` 到 P0/P9 记忆读取；`references/decision-panel.md` 到 P4 版本确认；`references/destructive-ops-gates.md` · `references/recovery-points.md` 到首个文件修改前（Notes/版本文件）
 
 ## 核心定位
 一次调用完成发布。**CI dry-run 未通过禁止创建 tag/发布；Notes 发布前必须人工确认。**
@@ -26,7 +27,7 @@
 |-------|--------|-------------|------|--------|
 | P0 | 版本与范围采集：版本源检测 + 待发布变动 + gh 可用性 | references/version-detection.md | read/命令 | 版本源确认 |
 | P1 | CI dry-run 门禁：按项目栈构建+测试+产物验证，**不发布** | references/ci-*.md（按栈选 1 个） | 构建命令 | 失败→修复重跑 |
-| P2 | Release Notes 生成：git log 分类映射 | references/changelog.md · references/conventional-commits.md | 文件工具 | 结构定稿 |
+| P2 | Release Notes 生成：git log 分类映射 | references/changelog.md · references/conventional-commits.md · references/release-notes.md | 文件工具 | 结构定稿 |
 | P3 | Notes 安全审计：内部泄露扫描 | references/security-audit.md | grep/命令 | Critical/High→阻断 |
 | P4 | 版本确认：面板 Q1（风格匹配选项 + CalVer 链） | references/decision-panel.md | 交互工具 | 目标版本 |
 | P5 | 创建 tag：SemVer vX.Y.Z / CalVer YYYY.MM.DD[.HHMM[.NN]]；验证 | references/version-tag.md | 命令 | tag 冲突检查 |

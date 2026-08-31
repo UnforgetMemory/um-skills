@@ -23,4 +23,5 @@
 - 文件类操作: 修改前先 read (fs-observation-policy 要求); glob 而非 shell find, read 而非 cat。
 - 命令类: pwsh 每次全新进程, 路径用 Windows 原生形式, 环境变量经 $env:NAME。
 - 沙箱: 常见为 workspace-write, 按会话策略为准; 被拒 = 策略拒绝, 非 bug, 不得换法重试同一命令 (审批启用时可一次升级重试)。
+- 护栏提示: 会话审批策略为 never 且文件策略为 danger-full-access 时平台保护全关; 破坏性操作唯一防线 = skill 门禁 (prohibitions.md A-D + destructive-ops-gates.md D0-D3) + git 恢复点 (recovery-points.md)。
 - 非零退出码是失败信号, 先调查再继续; Windows 强杀表现为裸 exit 1。
