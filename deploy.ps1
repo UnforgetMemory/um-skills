@@ -7,6 +7,8 @@
     DSH skills directory at ~/.dsh/skills/. It embeds the entry router,
     profession route tables, references/ and adapters/ - one directory is the
     whole distribution (ADR-003).
+    Interactive confirmation (D3 gate) is required when replacing an existing
+    deployment; non-interactive runs abort safely.
 #>
 
 $ErrorActionPreference = 'Stop'
@@ -37,8 +39,22 @@ foreach ($legacy in $legacyPaths) {
 
 $target = "$dst\um"
 Write-Host "  Copying um -> $target" -ForegroundColor Gray
+# D3 gate (destructive-ops-gates.md): confirm before replacing an existing deployment
+# Rename instead of delete so the previous deployment remains a recovery point
 if (Test-Path $target) {
-    Remove-Item -Path $target -Recurse -Force
+    Write-Host "  Gate D3: existing deployment at '$target' will be replaced (old kept as backup)." -ForegroundColor Yellow
+    $confirm = Read-Host "  Remove and re-copy? [y/N]"
+    if ($confirm -notmatch '^[yY]') {
+        Write-Host "  Aborted by user. No changes made." -ForegroundColor Red
+        exit 1
+    }
+    $backup = "$target.bak"
+    if (Test-Path $backup) {
+        Write-Host "  Aborted: previous recovery point '$backup' exists. Restore or remove it manually first." -ForegroundColor Red
+        exit 1
+    }
+    Rename-Item -Path $target -NewName (Split-Path $backup -Leaf)
+    Write-Host "  Recovery point: $backup" -ForegroundColor Yellow
 }
 Copy-Item -Path $src -Destination $dst -Recurse -Force
 
