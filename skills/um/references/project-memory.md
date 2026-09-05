@@ -11,7 +11,8 @@
 │   ├── environment.local.md   ← 环境识别结果（歧义优先 local）
 │   ├── artifact-decisions.local.md ← 产物迁移决策记忆（一行一决策，见 artifact-routing.md）
 │   ├── decisions.local.md     ← 个人决策草稿
-│   └── gotchas.local.md       ← 已知陷阱
+│   ├── gotchas.local.md       ← 已知陷阱
+│   └── uma/                   ← uma 分析缓存（区域 wiki 页 + index + locks，协议见 uma-memory.md）
 └── .gitignore                 ← 自包含：memory/ + *.local.md
 ```
 

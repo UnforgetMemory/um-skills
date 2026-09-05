@@ -1,15 +1,17 @@
 ---
 name: um
 description: >-
-  UM 工程链路 · 统一入口。按触发词路由到四个专业分册：umpp（规划）、
+  UM 工程链路 · 统一入口。按触发词路由到五个专业分册：umpp（规划）、
   umcommit（CHANGELOG/提交/推送）、umrelease（CI 门禁发布/tag）、
-  umreview（五轴审查）。共享 references/ 与 adapters/ 唯一副本，分层懒加载。
-  触发词：um/umpp/ULW/umcommit/写 CHANGELOG/提交/推送/umrelease/发布/
-  Release/umreview/审查/pre-merge review。
+  umreview（五轴审查）、uma（只读分析讲解）。共享 references/ 与 adapters/
+  唯一副本，分层懒加载。触发词：um/umpp/ULW/umcommit/写 CHANGELOG/提交/推送/
+  umrelease/发布/Release/umreview/审查/pre-merge review/uma/umanalyze/
+  项目分析/讲解代码/理解代码/代码链路/重构分析。
 whenToUse: >-
-  User says um, umpp, ULW, umcommit, umrelease, or umreview; or asks for
-  structured planning of a complex task, CHANGELOG + commit + push,
-  gh release publishing, or a code review / cleanup pass.
+  User says um, umpp, ULW, umcommit, umrelease, umreview, uma, or umanalyze;
+  or asks for structured planning of a complex task, CHANGELOG + commit + push,
+  gh release publishing, a code review / cleanup pass, or read-only project
+  analysis / code explanation / refactoring analysis.
 disable-model-invocation: false
 user-invocable: true
 ---
@@ -24,6 +26,9 @@ user-invocable: true
 | `umcommit` / 写 CHANGELOG / 提交 / 推送 | `professions/umcommit.md` |
 | `umrelease` / 发布 / Release / 版本 tag | `professions/umrelease.md` |
 | `umreview` / 审查 / pre-merge review | `professions/umreview.md` |
+| `uma` / `umanalyze` / 项目分析 / 讲解代码 / 理解代码 / 代码链路 / 重构分析 | `professions/uma.md` |
+
+> 裁决：意图同时命中多行 → 表序靠前分册优先；不确定 → 询问用户，禁止自行裁定
 
 ## 公共前置（每会话一次，先于任何分册执行）
 
@@ -35,6 +40,7 @@ user-invocable: true
 ```
 umpp（规划）→ umcommit（提交）→ umrelease（发布）
        ↑ 任意阶段可插入 umreview（审查）
+uma（只读分析）—— 独立于链路，任意阶段可插入；结论可移交 umpp/umreview 落地
 ```
 
 跨专业衔接时读取对应分册的「链路位置」节；同会话已读的 references 不重复读取。

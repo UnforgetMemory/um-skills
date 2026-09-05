@@ -5,6 +5,7 @@
 - 前置：无（链路起点）
 - 后继：umcommit（规划完成需提交时）→ umrelease（发布时）
 - 并行：umreview（执行中各波次间可插入审查）
+- 可调用：uma（只读前置分析，见 `professions/uma.md`）；uma 移交物 = uma 报告 + 记忆页路径，由用户触发，不自动接力
 
 ## 前置路由（最小集，先读）
 1. read `references/base-constraints.md`（元约束，必须）
