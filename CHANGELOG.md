@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-09-05
+
+### Added
+
+- **前置安全门禁 E（无版本保护目标）**：`prohibitions.md` 门禁表新增 E 行与决策流——操作目标不在任何版本管理（git/svn/hg）内时禁止自动修改，报告并等待用户方案决定；用户决定继续 → 追加备份决策（直接改 / 临时本地备份）后执行；判定前先排查部署/同步副本误判（修改落到源仓库再同步副本）；门禁 A 行互引
+- **代码规模自律提醒**：`base-constraints.md` 新增提醒——软性警示线单文件 ~300 行 / 单函数 ~50 行（仅自查参考，非硬性阈值），膨胀时优先按真实职责拆分，判据 = 职责单一与后续读取/分析成本，禁止一刀切式行数要求
+
+### Changed
+
+- 四分册前置路由与 `destructive-ops-gates.md`、dsh adapter 的门禁描述同步 A-D → A-E
+- `ADR-003` Status 标注部署面被 ADR-005 修订（决策链互引）
+
+### Removed
+
+- **`deploy.ps1`**（ADR-005）：部署收敛为 `npx skills add unforgetmemory/um-skills` 或手工复制 `skills/um` 至目标技能目录；DSH 部署路径文档更新为 `~/.agents/skills/`；v0.1.x 旧布局残留提示改由 ARCHITECTURE.md 承担
+
 ## [0.4.0] - 2026-09-05
 
 ### Added
