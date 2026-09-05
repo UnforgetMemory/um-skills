@@ -9,7 +9,7 @@
 
 ## 前置路由（最小集，先读）
 1. read `references/base-constraints.md`（元约束，必须）
-2. read `references/prohibitions.md`（禁令清单 + 安全门禁 A-D，必须）
+2. read `references/prohibitions.md`（禁令清单 + 安全门禁 A-E，必须）
 3. read `references/environment-routing.md` → 识别环境 → `adapters/<env>/tools.md`（会话内一次）
 4. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/project-memory.md`/`references/artifact-routing.md` 到 P0 记忆与产物扫描；`references/subagent-orchestration.md` 到首次分派；`references/destructive-ops-gates.md` · `references/recovery-points.md` 到首次修改/删除前
 
