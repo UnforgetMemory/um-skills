@@ -108,7 +108,7 @@ um-skills/
 ## 路径约定（部署后）
 
 ```
-~/.dsh/skills/um/            ← 单一自包含技能目录
+~/.agents/skills/um/         ← 单一自包含技能目录
     SKILL.md                 ← 入口路由
     professions/*.md         ← read professions/<name>.md
     references/*.md          ← read references/X.md
@@ -127,7 +127,7 @@ um-skills/
 | 安全审计规则 | 只改 `skills/um/references/security-audit.md` |
 | 版本规则 | `references/version-detection.md` + `version-tag.md` |
 | 新增流程规则 | 平台无关 → references/；平台相关 → 对应 adapter |
-| 分发机制变更 | 见 docs/adr/ADR-003（演进：ADR-001 → ADR-002 → ADR-003） |
+| 分发机制变更 | 见 docs/adr/ADR-003（演进：ADR-001 → ADR-002 → ADR-003 → ADR-005） |
 | 新增专业 | 新建 `skills/um/professions/<name>.md` + 入口路由表加一行 |
 | 人类文档 | README.md / ARCHITECTURE.md（禁止 agent 指令混入） |
 
@@ -138,11 +138,8 @@ um-skills/
 npx skills add unforgetmemory/um-skills
 
 # 方式二：手工复制唯一技能目录
-cp -r skills/um ~/.dsh/skills/
-
-# 方式三：部署脚本
-./deploy.ps1
+cp -r skills/um ~/.agents/skills/
 ```
 
-> 目标机 v0.1.x 旧布局残留的 `core/`、`adapters/` 与四个旧技能目录已无作用，可手动删除（deploy.ps1 仅提示不删除）。
+> 目标机 v0.1.x 旧布局残留的 `core/`、`adapters/` 与四个旧技能目录已无作用，可手动删除。
 > 首次部署后需重载技能（重启 DSH 进程或重新加载技能目录）使变更生效。

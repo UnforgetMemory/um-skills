@@ -75,7 +75,7 @@ npx skills add unforgetmemory/um-skills
 ### 部署到 DSH
 
 ```bash
-cp -r skills/um ~/.dsh/skills/
+cp -r skills/um ~/.agents/skills/
 ```
 
 ### 部署到 OpenCode
