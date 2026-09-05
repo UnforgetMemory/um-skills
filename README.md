@@ -52,8 +52,9 @@
 | 提交 → | **umcommit** | CHANGELOG 审计 + Conventional Commit + 原子提交 + 推送 |
 | 发布 → | **umrelease** | CI dry-run 门禁 + 专业 Release Notes + SemVer/CalVer 版本管理 |
 | 审查 ↔ | **umreview** | 核磁共振式五轴审查 + 安全审计 + 测试覆盖 + 清洁 |
+| 分析 ↕ | **uma** | 只读项目分析讲解：结构/链路/引用点/重构利弊/跨语言启发，不写代码 |
 
-四者组成完整工程链路，支持 **DSH**（DeepSeek Harness）、**OpenCode**、**Codex** 三大 AI Agent 环境，自动路由工具与能力。
+五者组成完整工程链路（其中 uma 为独立只读分析，任意阶段可用），支持 **DSH**（DeepSeek Harness）、**OpenCode**、**Codex** 三大 AI Agent 环境，自动路由工具与能力。
 
 > 💡 **设计理念**：软件是生命体，而非一次性修改。抽象来自真实变化（Evolution First）。每一层都不吞并其他层的内容，subagent 只携带自己链路的 reference。
 
@@ -67,7 +68,7 @@
 npx skills add unforgetmemory/um-skills
 ```
 
-> 伞形单技能：唯一技能目录 `skills/um/` 内含入口路由、四个专业分册与
+> 伞形单技能：唯一技能目录 `skills/um/` 内含入口路由、五个专业分册与
 > references / adapters 唯一副本——单一事实源、零复制零漂移，安装即所得
 > （[ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)）。
 
@@ -93,12 +94,13 @@ cp -r skills/um ~/.opencode/skills/
 | `umcommit` | 启动提交专业：CHANGELOG + 审计提交 + 推送（一次决策面板） |
 | `umrelease` | 启动发布专业：CI dry-run 门禁 → Release Notes → 版本 tag → gh 发布 |
 | `umreview` | 启动审查专业：核磁共振式五轴审查，不提交不推送 |
+| `uma` | 启动分析专业：只读讲解结构/链路/引用点/利弊，不写代码不做计划 |
 
 ---
 
 ## 🧩 技能一览
 
-> 四个专业收敛于统一入口技能 **um**（[ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)）：
+> 五个专业收敛于统一入口技能 **um**（[ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)）：
 > 安装后由触发词路由到对应分册，下表按专业列出。
 
 | Skill | 专业 | 一句话 | 详细文档 |
@@ -107,12 +109,14 @@ cp -r skills/um ~/.opencode/skills/
 | [**umcommit**](skills/um/professions/umcommit.md) | ✅ 提交 | CHANGELOG + 审计提交 + 推送（一次决策面板，版本智能适配） | [路由表](skills/um/professions/umcommit.md) |
 | [**umrelease**](skills/um/professions/umrelease.md) | 🚀 发布 | CI dry-run 门禁 → Release Notes → SemVer/CalVer tag → gh 发布 | [路由表](skills/um/professions/umrelease.md) |
 | [**umreview**](skills/um/professions/umreview.md) | 🔍 审查 | 核磁共振式五轴审查 + 安全/gitignore/测试/清洁，不提交不推送 | [路由表](skills/um/professions/umreview.md) |
+| [**uma**](skills/um/professions/uma.md) | 🔬 分析 | 只读项目分析讲解：结构/链路/引用点/重构利弊/跨语言启发（区域 wiki 记忆，gitRef 变更感知刷新） | [路由表](skills/um/professions/uma.md) |
 
 ### 技能链路
 
 ```
 umpp（规划）──→ umcommit（提交）──→ umrelease（发布）
        ↑ 任意阶段可插入 umreview（审查）
+uma（只读分析）── 独立于链路，任意阶段可插入
 ```
 
 ---
@@ -128,11 +132,11 @@ umpp（规划）──→ umcommit（提交）──→ umrelease（发布）
 │  元约束 · 环境路由 · 上下文自适应 · 决策面板 · Subagent 编排 · 项目记忆 │
 ├─────────────────────────────────────────────────────────────┤
 │  L1  专业编排层                                              │
-│  入口 SKILL.md + professions/ 四分册路由表                    │
-│  umpp · umcommit · umrelease · umreview                     │
+│  入口 SKILL.md + professions/ 五分册路由表                    │
+│  umpp · umcommit · umrelease · umreview · uma               │
 ├─────────────────────────────────────────────────────────────┤
 │  L2  流程规则层                                              │
-│  um/references/ (~25 个细分文件)                              │
+│  um/references/ (30 个细分文件)                              │
 │  每文件 = 一个可独立委派子任务边界                              │
 ├─────────────────────────────────────────────────────────────┤
 │  L3  环境工具层                                              │
@@ -148,6 +152,7 @@ umpp（规划）──→ umcommit（提交）──→ umrelease（发布）
 - **波次迭代** — 步骤完整性优先，容量不足唯一降级 = 波切更细，绝不删步骤
 - **Subagent 编排** — 决策树分派，只带自己链路的 reference
 - **伞形单技能** — 统一顶层容器内唯一技能 `um`：canonical 即安装物，单一事实源零复制（[ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)）
+- **uma 记忆八爪鱼** — 区域 wiki 记忆：gitRef 变更感知的按需刷新（FRESH 零写入）、区域锁防并发写、答案证据永远来自当次 read（[ADR-004](docs/adr/ADR-004-uma-readonly-analysis.md)）
 - **缓存稳定** — 指令文本零动态值，KV Cache 前缀稳定
 
 > 📖 详见 [ARCHITECTURE.md](ARCHITECTURE.md) 了解完整架构设计。
@@ -163,7 +168,8 @@ umpp（规划）──→ umcommit（提交）──→ umrelease（发布）
 ├── constraints/          入库（团队共享）
 │   ├── hardcode-index.md 硬编码语义索引（升级版本不漏硬编码）
 │   └── project-rules.md  项目规范
-└── memory/               不 sync（*.local.md：环境识别/决策草稿/陷阱）
+├── memory/               不 sync（*.local.md：环境识别/决策草稿/陷阱）
+│   └── uma/              uma 分析缓存（区域 wiki 页 + index + locks，gitRef 变更感知刷新）
 ```
 
 - `constraints/` — 团队共享，随版本入库
@@ -181,6 +187,7 @@ umpp（规划）──→ umcommit（提交）──→ umrelease（发布）
 | [umcommit/SKILL.md](skills/um/professions/umcommit.md) | 提交专业路由表 |
 | [umrelease/SKILL.md](skills/um/professions/umrelease.md) | 发布专业路由表 |
 | [umreview/SKILL.md](skills/um/professions/umreview.md) | 审查专业路由表 |
+| [uma/SKILL.md](skills/um/professions/uma.md) | 分析专业路由表 |
 
 ---
 

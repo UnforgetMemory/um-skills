@@ -19,8 +19,9 @@ L0 基础约束层  um/references/{base-constraints, environment-routing,
                 project-memory}.md
                 ← 所有分册引用，单一事实来源
 
-L1 专业编排层  入口 SKILL.md（触发词路由）+ professions/ 四个分册路由表
+L1 专业编排层  入口 SKILL.md（触发词路由）+ professions/ 五个分册路由表
                 umpp（规划）· umcommit（提交）· umrelease（发布）· umreview（审查）
+                uma（只读分析，独立于链路）
                 ← 每行 Phase 标注：做什么 / read 什么 / 用什么工具 / 决策点
 
 L2 流程规则层  um/references/ 其余 ~25 个细分文件
@@ -35,6 +36,7 @@ L3 环境工具层  adapters/{dsh,opencode,codex}/{tools,capabilities}.md
 ```
 umpp（规划）→ umcommit（提交）→ umrelease（发布）
        ↑ 任意阶段可插入 umreview（审查）
+uma（只读分析）—— 独立于链路，任意阶段可插入；结论可移交 umpp/umreview 落地
 ```
 
 ## 关键机制
@@ -90,8 +92,8 @@ memory/        不 sync：*.local.md（环境/决策草稿/陷阱）
 um-skills/
 └── skills/um/                ← vercel-labs/skills 官方统一顶层容器内的唯一技能
     ├── SKILL.md              ← 入口路由表：触发词 → 专业分册 + 公共前置
-    ├── professions/          ← 四专业分册（无 frontmatter，不被注册为技能）
-    │   ├── umpp.md · umcommit.md · umrelease.md · umreview.md
+    ├── professions/          ← 五专业分册（无 frontmatter，不被注册为技能）
+    │   ├── umpp.md · umcommit.md · umrelease.md · umreview.md · uma.md
     ├── references/           ← L0+L2 全量唯一副本（单一事实源）
     └── adapters/<env>/       ← L3 唯一副本（dsh / opencode / codex）
 ```

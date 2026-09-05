@@ -52,8 +52,9 @@
 | Commit → | **umcommit** | CHANGELOG audit + Conventional Commit + atomic commit + push |
 | Release → | **umrelease** | CI dry-run gate + professional Release Notes + SemVer/CalVer versioning |
 | Review ↔ | **umreview** | MRI-style five-axis code review + security audit + test coverage + cleanup |
+| Analyze ↕ | **uma** | Read-only project analysis & explanation: structure, chains, reference points, refactor trade-offs, cross-language idioms |
 
-Together, they form a complete engineering pipeline, supporting **DSH** (DeepSeek Harness), **OpenCode**, and **Codex** AI Agent environments with automatic tool and capability routing.
+Five professions form a complete engineering pipeline (with **uma** as an independent read-only lane usable at any stage), supporting **DSH** (DeepSeek Harness), **OpenCode**, and **Codex** AI Agent environments with automatic tool and capability routing.
 
 > 💡 **Design Philosophy**: Software is a living organism, not a one-time modification. Abstraction emerges from real change (Evolution First). No layer absorbs the content of another; each subagent carries only its own chain's references.
 
@@ -68,7 +69,7 @@ npx skills add unforgetmemory/um-skills
 ```
 
 > Umbrella single skill: the only skill directory `skills/um/` embeds the entry
-> router, four profession route tables, and the single copies of
+> router, five profession route tables, and the single copies of
 > references / adapters — one source of truth, zero duplication, install as-is
 > ([ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)).
 
@@ -94,12 +95,13 @@ In any supported environment, speak the trigger words to your AI Agent to invoke
 | `umcommit` | Start Commit: CHANGELOG + audited commit + push (single decision panel) |
 | `umrelease` | Start Release: CI dry-run gate → Release Notes → version tag → gh release |
 | `umreview` | Start Review: MRI-style five-axis code review, no commit or push |
+| `uma` | Start Analysis: read-only explanation of structure / chains / reference points / trade-offs, no code |
 
 ---
 
 ## 🧩 Skills Overview
 
-> The four professions are consolidated into the single umbrella skill **um**
+> The five professions are consolidated into the single umbrella skill **um**
 > ([ADR-003](docs/adr/ADR-003-umbrella-single-skill.md)): after install, trigger
 > words route to the matching profession table below.
 
@@ -109,12 +111,14 @@ In any supported environment, speak the trigger words to your AI Agent to invoke
 | [**umcommit**](skills/um/professions/umcommit.md) | ✅ Commit | CHANGELOG + audited commit + push (single decision panel, version-aware) | [Router](skills/um/professions/umcommit.md) |
 | [**umrelease**](skills/um/professions/umrelease.md) | 🚀 Release | CI dry-run gate → Release Notes → SemVer/CalVer tag → gh release | [Router](skills/um/professions/umrelease.md) |
 | [**umreview**](skills/um/professions/umreview.md) | 🔍 Review | MRI-style five-axis review + security/gitignore/test/cleanup, no commit or push | [Router](skills/um/professions/umreview.md) |
+| [**uma**](skills/um/professions/uma.md) | 🔬 Analysis | Read-only project analysis & explanation: structure, chains, reference points, refactor trade-offs, cross-language idioms (region wiki memory, gitRef change-aware refresh) | [Router](skills/um/professions/uma.md) |
 
 ### Skill Chain
 
 ```
 umpp (Planning) ──→ umcommit (Commit) ──→ umrelease (Release)
        ↑ Review (umreview) insertable at any stage
+uma (read-only Analysis) ── independent lane, insertable at any stage
 ```
 
 ---
@@ -131,11 +135,11 @@ The project uses a **four-layer architecture** for progressive disclosure and on
 │  Decision Panel · Subagent Orchestration · Project Memory     │
 ├───────────────────────────────────────────────────────────────┤
 │  L1  Skill Orchestration Layer                                │
-│  Entry SKILL.md + professions/ four router tables             │
-│  umpp · umcommit · umrelease · umreview                      │
+│  Entry SKILL.md + professions/ five router tables             │
+│  umpp · umcommit · umrelease · umreview · uma                │
 ├───────────────────────────────────────────────────────────────┤
 │  L2  Process Rules Layer                                      │
-│  um/references/ (~25 granular files)                          │
+│  um/references/ (30 granular files)                           │
 │  Each file = one independently delegatable task boundary      │
 ├───────────────────────────────────────────────────────────────┤
 │  L3  Environment Tool Layer                                   │
@@ -151,6 +155,7 @@ The project uses a **four-layer architecture** for progressive disclosure and on
 - **Wave Iteration** — Step completeness first; the only degradation when capacity is low is finer waves, never skipping steps
 - **Subagent Orchestration** — Decision tree dispatch, each subagent carries only its own chain's references
 - **Umbrella Single Skill** — one skill `um` inside the unified top-level container: canonical is the artifact, single source of truth with zero duplication ([ADR-003](docs/adr/ADR-003-umbrella-single-skill.md))
+- **uma Memory Octopus** — region wiki memory: gitRef change-aware on-demand refresh (FRESH = zero write), region locks against concurrent writes, answer evidence always from live reads ([ADR-004](docs/adr/ADR-004-uma-readonly-analysis.md))
 - **Cache Stability** — Zero dynamic values in instruction text, stable KV Cache prefix
 
 > 📖 See [ARCHITECTURE.md](ARCHITECTURE.md) for the complete architecture design.
@@ -166,7 +171,8 @@ Each project root can have a `.um.agents/` directory for persisting engineering 
 ├── constraints/          Checked in (team shared)
 │   ├── hardcode-index.md Hardcoded semantic index (never miss a version bump)
 │   └── project-rules.md  Project-specific rules
-└── memory/               Not synced (*.local.md: env detection, decision drafts, traps)
+├── memory/               Not synced (*.local.md: env detection, decision drafts, traps)
+│   └── uma/              uma analysis cache (region wiki pages + index + locks, gitRef change-aware refresh)
 ```
 
 - `constraints/` — Team shared, committed with the project
@@ -184,6 +190,7 @@ Each project root can have a `.um.agents/` directory for persisting engineering 
 | [umcommit/SKILL.md](skills/um/professions/umcommit.md) | Commit skill router |
 | [umrelease/SKILL.md](skills/um/professions/umrelease.md) | Release skill router |
 | [umreview/SKILL.md](skills/um/professions/umreview.md) | Review skill router |
+| [uma/SKILL.md](skills/um/professions/uma.md) | Analysis skill router |
 
 ---
 
