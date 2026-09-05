@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-09-05
+
+### Added
+
+- **uma 只读分析专业（umanalyze）**：新增 `professions/uma.md`——结构地图/区域深潜/链路追踪/引用点/重构分析/跨语言启发六类只读分析（U0–U5 管线），不写代码不产计划，结论可移交 umpp/umreview；umpp/umreview 链路位置回指 uma（移交物 = uma 报告 + 记忆页路径，不自动接力）
+- **区域 wiki 记忆协议（八爪鱼）**：新增 `references/uma-memory.md`——`.um.agents/memory/uma/` 区域页 + index + locks；gitRef 变更感知的按需刷新（FRESH 零写入 / STALE 重析 / MISSING 新建）；三级信任模型（Live/Snapshot/Advice，答案证据永远来自当次 read，不宣称「实时」）；区域写锁防多 agent 并发写
+- **uma 分析方法**：新增 `references/uma-methods.md`——六类分析路由、只读事实采集、Fact/Assumption/Decision 标记、跨语言启发
+- **ADR-004**：记录 uma 专业与记忆协议决策（记忆 = 先验而非真相源；gitRef 漂移检测 + 时间戳双轨失效）
+
+### Changed
+
+- 入口 `SKILL.md`：路由表 +1 行（`uma`/`umanalyze` 触发词）、description/whenToUse 增补、冲突裁决规则（意图同时命中多行 → 表序靠前优先，不确定询问用户）
+- `project-memory.md`：记忆目录树增补 `memory/uma/`；产物迁移决策记忆预登记 uma 缓存 skip
+- 人类文档同步：`README.md`/`README.en.md` 五专业表、uma 记忆八爪鱼机制与 ADR-004 链接；`ARCHITECTURE.md` 五专业分层与布局树
+
 ## [0.3.0] - 2026-08-31
 
 ### Added
