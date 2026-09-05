@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted（2026-08-14，取代 [ADR-002](ADR-002-self-contained-skill-bundles.md)）
+Accepted（2026-08-14，取代 [ADR-002](ADR-002-self-contained-skill-bundles.md)；部署面被 [ADR-005](ADR-005-remove-deploy-script.md) 修订）
 
 ## Context
 
