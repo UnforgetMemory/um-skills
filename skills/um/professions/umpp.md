@@ -9,7 +9,7 @@
 
 ## 前置路由（最小集，先读）
 1. read `references/base-constraints.md`（元约束，必须）
-2. read `references/prohibitions.md`（禁令清单 + 安全门禁 A-E，必须）
+2. read `references/prohibitions.md`（禁令清单 + 安全门禁 A-E + 人工确认协议，必须）
 3. read `references/environment-routing.md` → 识别环境 → `adapters/<env>/tools.md`（会话内一次）
 4. 其余 L0 延迟加载：`references/context-adaptation.md` 到 Phase 0 档位自检；`references/project-memory.md`/`references/artifact-routing.md` 到 P0 记忆与产物扫描；`references/subagent-orchestration.md` 到首次分派；`references/destructive-ops-gates.md` · `references/recovery-points.md` 到首次修改/删除前
 
@@ -20,7 +20,7 @@
 1. 修改/删除前过安全门禁（root 唯一识别 + 版本管理强制 + git 仓库/remote/身份，缺失或识别不出则询问用户）并按 `references/destructive-ops-gates.md` D0-D3 分级执行（D2/D3 前建恢复点，见 `references/recovery-points.md`）；工作区外操作走 OOB 确认流（理由 + 可恢复性提示）
 2. 禁止大规模重构替代局部修复；禁止创建空抽象层
 3. ADR 驱动变更：改架构假设先记 ADR 再改代码
-4. 禁止自动 commit/push/release
+4. 禁止自动 commit/push/release（人工确认协议见 `references/prohibitions.md`）；波次检查点用恢复点（`references/recovery-points.md` R1/R2）留痕，禁止以 git commit 当快照；有提交需求 → 移交 umcommit
 
 ## 执行管线（路由表）
 
@@ -38,7 +38,7 @@
 每波产出结构化证据（文件:行），波间收缩保留摘要。
 
 ## 验证门禁
-1. 语言工具链检查通过 → 2. 构建 exit 0 → 3. 测试全绿 → 4. 文档同步 → 5. 证据齐全
+1. 语言工具链检查通过 → 2. 构建 exit 0 → 3. 测试全绿 → 4. 文档同步 → 5. 证据齐全 → 6. 全程未自动执行任何 commit/push/release（违规 → umreview 拦截）
 
 ## 输出报告
 ```
@@ -47,5 +47,6 @@
 ### 变更文件（带证据）
 ### 验证结果（构建/测试输出）
 ### 风险与剩余工作
+### 提交状态: 未提交（如需要 → 移交 umcommit）
 ### ⚠️ 状态: COMPLETED / BLOCKED
 ```

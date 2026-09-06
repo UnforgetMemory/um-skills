@@ -9,8 +9,9 @@
 
 ## 前置路由（最小集，先读）
 1. read `references/base-constraints.md`（元约束，必须）
-2. read `references/environment-routing.md` → 识别环境 → `adapters/<env>/tools.md`（会话内一次）
-3. 延迟加载：`references/context-adaptation.md` 到 U0 档位自检；`references/uma-methods.md` 首次分析；
+2. read `references/prohibitions.md`（禁令清单 + 安全门禁 A-E + 人工确认协议，必须）
+3. read `references/environment-routing.md` → 识别环境 → `adapters/<env>/tools.md`（会话内一次）
+4. 延迟加载：`references/context-adaptation.md` 到 U0 档位自检；`references/uma-methods.md` 首次分析；
    `references/uma-memory.md` 首次触记忆；`references/project-memory.md` 首次写记忆；
    `references/subagent-orchestration.md` 首次分派
 
