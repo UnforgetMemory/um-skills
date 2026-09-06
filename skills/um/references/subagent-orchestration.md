@@ -12,7 +12,7 @@
 ```
 
 ## 下探分派（逻辑链路，非吞并）
-- 分派指令只含：任务定义 + DoD + 该任务需要的 reference 路径 + adapter
+- 分派指令只含：任务定义 + DoD + 禁止事项（至少内联：禁止自动 commit/push/release，人工确认协议见 prohibitions.md）+ 该任务需要的 reference 路径 + adapter
 - subagent **只读自己流程需要的 reference**，不继承/不吞入无关流程内容
 - 每个 reference = 一个可独立委派的子任务边界
 

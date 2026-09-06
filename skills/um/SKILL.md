@@ -33,7 +33,10 @@ user-invocable: true
 ## 公共前置（每会话一次，先于任何分册执行）
 
 1. read `references/base-constraints.md`（元约束，必须）
-2. read `references/environment-routing.md` → 识别环境 → read `adapters/<env>/tools.md`
+2. read `references/prohibitions.md`（禁令清单 + 安全门禁 A-E + 人工确认协议，必须）
+3. read `references/environment-routing.md` → 识别环境 → read `adapters/<env>/tools.md`
+
+> L0 禁令/门禁不随上下文档位裁剪：context-adaptation 的 L/M/H 档位只调整业务规则加载粒度，禁令与门禁（含人工确认协议）始终生效。
 
 ## 链路
 
@@ -50,3 +53,4 @@ uma（只读分析）—— 独立于链路，任意阶段可插入；结论可�
 1. 本入口只做路由：选定分册后按其 Phase 路由表执行，不在入口层做业务决策
 2. `references/` 与 `adapters/` 是唯一规则源；修改在本技能目录内进行，一处生效
 3. 分册间禁止互相内联规则；subagent 只带自己链路的 reference 路径
+4. commit / push / release（含 tag 创建）一律按 prohibitions.md「人工确认协议」经分册决策面板人工确认后执行；禁止推定确认、禁止静默执行
