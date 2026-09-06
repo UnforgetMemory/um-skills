@@ -26,7 +26,7 @@
 3. 数据驱动：每个断言带证据（文件:行 / 命令输出）
 
 ## 禁止行为总纲
-- 自动 commit / push / release（必须人工确认）
+- 自动 commit / push / release（必须人工确认；协议见 prohibitions.md）
 - 删除未经确认的文件/测试
 - 修改无关模块
 - 未经验证宣称完成
