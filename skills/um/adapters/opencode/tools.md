@@ -24,7 +24,7 @@
 | LSP 诊断 | lsp_diagnostics | 获取编辑器/语言服务器诊断 |
 | 多 Agent 编排 | task | 创建/管理 agent 任务 (编排子任务) |
 | 子 Agent | add_subagent | 添加子 agent 协作 |
-| 交互确认 | 文本 TUI 输入 | 无 GUI 弹窗; 需明确列出选项编号供选择 |
+| 交互确认 | 文本 TUI 输入 | 无 GUI 弹窗; 需明确列出选项编号供选择; 用户未返回编号 = 未确认, 禁止执行 commit/push/release (协议见 references/prohibitions.md) |
 | 任务清单 | 无内置 | 计划写对话中自行维护 |
 | 网络 | 无内置 | 无 web 搜索/抓取工具 |
 

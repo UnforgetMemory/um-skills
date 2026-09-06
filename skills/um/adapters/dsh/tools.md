@@ -24,4 +24,5 @@
 - 命令类: pwsh 每次全新进程, 路径用 Windows 原生形式, 环境变量经 $env:NAME。
 - 沙箱: 常见为 workspace-write, 按会话策略为准; 被拒 = 策略拒绝, 非 bug, 不得换法重试同一命令 (审批启用时可一次升级重试)。
 - 护栏提示: 会话审批策略为 never 且文件策略为 danger-full-access 时平台保护全关; 破坏性操作唯一防线 = skill 门禁 (prohibitions.md A-E + destructive-ops-gates.md D0-D3) + git 恢复点 (recovery-points.md)。
+- 上述模式下 commit/push/release 的「人工确认」唯一通道 = ask_user_question 面板 (协议见 prohibitions.md 人工确认协议); 禁止以「平台无审批」为由推定确认或跳过面板。
 - 非零退出码是失败信号, 先调查再继续; Windows 强杀表现为裸 exit 1。

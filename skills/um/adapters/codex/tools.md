@@ -8,7 +8,7 @@
 | 执行命令 | shell (bash/sh) | shell 命令执行; 支持 background 运行 |
 | 网络 | web_search / web_fetch | 搜索与抓取网页 |
 | 子任务 | task | sandboxed 子任务, 独立环境, 可指定 agent |
-| 交互确认 | 文本 (TUI) | 无 GUI 按钮卡片; 需明确列出选项编号供选择 |
+| 交互确认 | 文本 (TUI) | 无 GUI 按钮卡片; 需明确列出选项编号供选择; 用户未返回编号 = 未确认, 禁止执行 commit/push/release (协议见 references/prohibitions.md) |
 
 ## 使用要点
 

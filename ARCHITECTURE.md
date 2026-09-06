@@ -14,9 +14,9 @@
 ## 四层架构
 
 ```
-L0 基础约束层  um/references/{base-constraints, environment-routing,
-                context-adaptation, decision-panel, subagent-orchestration,
-                project-memory}.md
+L0 基础约束层  um/references/{base-constraints, prohibitions,
+                environment-routing, context-adaptation, decision-panel,
+                subagent-orchestration, project-memory}.md
                 ← 所有分册引用，单一事实来源
 
 L1 专业编排层  入口 SKILL.md（触发词路由）+ professions/ 五个分册路由表
@@ -48,6 +48,8 @@ uma（只读分析）—— 独立于链路，任意阶段可插入；结论可�
 
 ### 决策面板（一次多问）
 - 交互工具一次传多个问题 + 结构化选项（GUI 按钮卡片）
+- 确认效力 = 硬前置：面板选项未返回 → 对应执行 Phase BLOCKED；commit/push/release 必须人工确认（协议见 references/prohibitions.md）
+- 效力层级：确认默认「仅本次」（单次有效，新一轮/内容变更须重新确认）；面板须提供「本会话允许」选项（仅豁免确认项，内容展示不豁免，可随时撤销，会话结束失效）
 - 版本选项智能适配：SemVer 项目只给 [major/minor/patch/自定义/skip]；CalVer 项目只给日期选项
 - CalVer 链：`YYYY.MM.DD` → 同日追加 `.HHMM` → 同日同刻追加 `.NN`（随机二位数）
 - 版本源官方优先：package.json → ... → git tag；`.um.agents` 索引仅为硬编码同步清单
@@ -78,7 +80,7 @@ memory/        不 sync：*.local.md（环境/决策草稿/陷阱）
 |----|-----------|------------|
 | 常驻（um 入口 summary） | ~250 字符 | ~250 |
 | 单个 SKILL.md（L1 路由表） | 2,065–2,599 | ~2,000–2,600 |
-| L0 基础约束（按需 read，6 文件合计） | 4,733 | ~2,400–4,700 |
+| L0 基础约束（按需 read，7 文件合计） | 9,676 | ~4,800–9,700 |
 | 单个 L2 reference | 626–3,388（平均 1,413） | ~600–3,400 |
 | L3 adapter（会话一次） | 532–1,504 | ~500–1,500 |
 | 典型 umcommit 全流程 | — | ~3,000–4,000（旧版 ~5,000） |
@@ -100,7 +102,7 @@ um-skills/
 
 - **canonical 即安装物**：仓库内只有这一份规则源——零复制、零漂移、无生成器；
   编辑直接发生在 `skills/um/` 内，一处生效
-- 入口只做路由（触发词 → 分册）与公共前置（base-constraints + environment-routing）；
+- 入口只做路由（触发词 → 分册）与公共前置（base-constraints + prohibitions + environment-routing）；
   分册保留完整 Phase 路由表，按需懒加载
 - 决策演进：桩方案（ADR-001）→ 每技能 vendor（ADR-002）→ 伞形收敛（ADR-003）；
   安装器事实核查见 ADR-002
