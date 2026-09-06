@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-09-06
+
+### Added
+
+- **人工确认协议（commit/push/release）**：`prohibitions.md` 新增协议八条——内容先展示、面板确认机制、单次效力默认（每次确认仅覆盖当次内容与当次执行，内容变更或新一轮须重新确认）、会话级允许可选豁免（仅豁免确认项、范围沿用授权当轮选项禁扩大、可随时撤销）、禁止推定、平台审批非替代品、条件执行、证据记录
+- **确认效力硬前置**：`decision-panel.md` 面板选项返回 = 唯一有效确认，未返回 → 对应执行 Phase BLOCKED；确认面板附带效力选项「仅本次 / 本会话允许」；确认记录（面板编号 + 选项 + 效力层级）写入分册报告
+- **入口约束前置**：`SKILL.md` 公共前置三步加载 `prohibitions.md`；L0 禁令/门禁不随 L/M/H 档位裁剪（`context-adaptation.md`）
+- **执行分册确认门禁**：umcommit 新增 Q4 确认效力，commit/push 当轮硬前置；umrelease Q1+Q2+Q3 一次交互前置至 P4，tag 创建与发布以面板选项为硬前置，验证门禁按效力分支
+- **subagent 禁令内联**：下探分派指令强制内联「禁止自动 commit/push/release」
+
+### Changed
+
+- 禁令 #11–13 措辞统一为「必须（显式）人工确认」（含 tag 创建）；禁令编号去重为全局连续 1–20
+- 五分册前置路由统一加载 `prohibitions.md`（uma 补漏）；执行分册硬性纪律拆分（确认硬前置 + 效力语义）
+- 三环境 adapter 确认通道与协议对齐（dsh 审批禁用时 `ask_user_question` 为唯一确认通道）
+- `ARCHITECTURE.md`：L0 列表补 `prohibitions.md`、L0 规则量实测更新（7 文件 / 9,676 字符）、决策面板机制与效力层级同步
+
 ## [0.4.1] - 2026-09-05
 
 ### Added
