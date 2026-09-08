@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-09-08
+
+### Added
+
+- **提问约束（生成提问前 · 路由分支）**：`base-constraints.md` 新增 L0 提问纪律——分类先行（静态/独立问题集一次多问；动态分支问题链分批多轮；存疑按动态处理）；动态分支采取分批提前思考链路，禁止一刀切全量提问，每批只问决定下一分支的最少问题；单问 content 简要精炼明了、禁止单问长文本，必要长问题切分为承接逻辑的子问题；人工确认协议「内容先展示」不因本条缩减
+- **决策面板动态分支例外**：`decision-panel.md`「禁止分轮」限定为静态/独立决策集，动态分支问题链分批多轮并与 `base-constraints.md`「提问约束」互引
+
+### Changed
+
+- `ARCHITECTURE.md`：设计原则与决策面板机制补动态分支例外；L0 规则量实测更新（7 文件 / 11,124 字符，token 估算 5,500–11,100）
+
 ## [0.5.0] - 2026-09-06
 
 ### Added
